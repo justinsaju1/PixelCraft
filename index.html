@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PixelCraft Studio – Creative Websites & Designs for Growing Businesses</title>
+<meta name="description" content="PixelCraft Studio – A student freelance team offering professional website development and Canva graphic design services for small businesses, startups, and local shops." />
+<meta name="keywords" content="website development, graphic design, Canva, freelance, small business, portfolio, landing page" />
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+/* ============================================================
+   CSS VARIABLES & RESET
+   ============================================================ */
+:root {
+  --c-bg: #f8f9ff;
+  --c-surface: #ffffff;
+  --c-surface2: #f0f2ff;
+  --c-border: rgba(99,102,241,0.12);
+  --c-text: #0f0f1a;
+  --c-muted: #6b7280;
+  --c-heading: #0a0a1a;
+
+  --c-blue: #3b82f6;
+  --c-indigo: #6366f1;
+  --c-violet: #7c3aed;
+  --c-purple: #8b5cf6;
+
+  --grad-main: linear-gradient(135deg, #6366f1 0%, #7c3aed 50%, #a855f7 100%);
+  --grad-subtle: linear-gradient(135deg, #ede9fe 0%, #e0e7ff 100%);
+  --grad-hero: linear-gradient(135deg, #0f0c29 0%, #1a1040 40%, #24243e 100%);
+  --grad-card: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(240,242,255,0.7) 100%);
+
+  --shadow-sm: 0 1px 3px rgba(99,102,241,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 20px rgba(99,102,241,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 40px rgba(99,102,241,0.18), 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-xl: 0 20px 60px rgba(99,102,241,0.22), 0 8px 24px rgba(0,0,0,0.1);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --nav-h: 72px;
+  --section-pad: clamp(64px, 8vw, 120px);
+}
+
+[data-theme="dark"] {
+  --c-bg: #080812;
+  --c-surface: #0e0e20;
+  --c-surface2: #14142a;
+  --c-border: rgba(139,92,246,0.18);
+  --c-text: #e8e8f4;
+  --c-muted: #9ca3af;
+  --c-heading: #f0f0ff;
+  --grad-subtle: linear-gradient(135deg, #1e1040 0%, #1a1050 100%);
+  --grad-card: linear-gradient(145deg, rgba(14,14,32,0.95) 0%, rgba(20,20,45,0.85) 100%);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.5), 0 2px 8px rgba(99,102,241,0.15);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.6), 0 4px 16px rgba(139,92,246,0.2);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--grad-hero);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 20px;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+.loader-logo {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 800;
+  background: var(--grad-main);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.loader-bar {
+  width: 200px; height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 99px; overflow: hidden;
+}
+.loader-bar-inner {
+  height: 100%; width: 0;
+  background: var(--grad-main);
+  border-radius: 99px;
+  animation: loadBar 1.8s ease forwards;
+}
+@keyframes loadBar { to { width: 100%; } }
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--c-bg); }
+::-webkit-scrollbar-thumb { background: var(--c-indigo); border-radius: 99px; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  padding: 0 clamp(20px, 4vw, 48px);
+  transition: background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s;
+}
+#navbar.scrolled {
+  background: rgba(var(--c-surface-rgb, 255,255,255), 0.85);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-md);
+  background: color-mix(in srgb, var(--c-surface) 85%, transparent);
+}
+[data-theme="dark"] #navbar.scrolled {
+  background: rgba(8,8,18,0.88);
+}
+.nav-inner {
+  width: 100%; max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem; font-weight: 800;
+  background: var(--grad-main);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-links a {
+  font-size: 0.9rem; font-weight: 500;
+  padding: 7px 14px; border-radius: var(--radius-sm);
+  transition: background 0.2s, color 0.2s;
+  color: var(--c-muted);
+}
+.nav-links a:hover { background: var(--c-surface2); color: var(--c-indigo); }
+.nav-actions {
+  display: flex; align-items: center; gap: 10px;
+}
+.theme-btn {
+  width: 38px; height: 38px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--c-surface2); color: var(--c-muted);
+  transition: background 0.2s, color 0.2s;
+}
+.theme-btn:hover { background: var(--c-border); color: var(--c-indigo); }
+.nav-cta {
+  font-size: 0.875rem; font-weight: 600;
+  padding: 9px 20px; border-radius: var(--radius-sm);
+  background: var(--grad-main);
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.4);
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99,102,241,0.5); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  width: 38px; height: 38px; padding: 8px;
+  border-radius: var(--radius-sm);
+  background: var(--c-surface2);
+}
+.hamburger span {
+  display: block; height: 2px; background: var(--c-text);
+  border-radius: 2px; transition: 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile Nav */
+.mobile-nav {
+  display: none; position: fixed;
+  top: var(--nav-h); left: 0; right: 0; z-index: 999;
+  background: var(--c-surface);
+  padding: 20px clamp(20px, 4vw, 48px) 28px;
+  box-shadow: var(--shadow-lg);
+  border-bottom: 1px solid var(--c-border);
+  flex-direction: column; gap: 4px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  padding: 12px 16px; border-radius: var(--radius-sm);
+  font-weight: 500; transition: background 0.2s, color 0.2s;
+}
+.mobile-nav a:hover { background: var(--c-surface2); color: var(--c-indigo); }
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+#hero {
+  min-height: 100vh;
+  background: var(--grad-hero);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding: calc(var(--nav-h) + 40px) clamp(20px, 4vw, 48px) 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+}
+/* Animated orbs */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.35;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #6366f1, transparent 70%);
+  top: -100px; left: -100px;
+  animation-duration: 10s;
+}
+.orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #a855f7, transparent 70%);
+  bottom: -80px; right: -80px;
+  animation-duration: 12s; animation-delay: -4s;
+}
+.orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #3b82f6, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  animation-duration: 14s; animation-delay: -8s;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+/* Grid lines bg */
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Floating particles */
+.particles { position: absolute; inset: 0; }
+.particle {
+  position: absolute; width: 4px; height: 4px;
+  background: rgba(255,255,255,0.4); border-radius: 50%;
+  animation: particleFloat linear infinite;
+}
+@keyframes particleFloat {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; transform: scale(1); }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-20px) scale(0.5); opacity: 0; }
+}
+
+.hero-content {
+  position: relative; z-index: 1;
+  max-width: 780px; text-align: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(99,102,241,0.18);
+  border: 1px solid rgba(99,102,241,0.3);
+  padding: 6px 16px; border-radius: 99px;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+  color: #a5b4fc; margin-bottom: 28px;
+  backdrop-filter: blur(10px);
+  animation: fadeDown 0.8s ease both;
+}
+.hero-badge span { width: 6px; height: 6px; background: #a5b4fc; border-radius: 50%; }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 800; line-height: 1.1;
+  color: #fff; letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeUp 0.9s ease 0.15s both;
+}
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, #a5b4fc 0%, #e879f9 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-desc {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 40px;
+  font-weight: 300; line-height: 1.7;
+  animation: fadeUp 0.9s ease 0.3s both;
+}
+.hero-btns {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; flex-wrap: wrap;
+  animation: fadeUp 0.9s ease 0.45s both;
+}
+.btn-primary {
+  padding: 15px 32px; border-radius: var(--radius-md);
+  background: var(--grad-main);
+  color: #fff; font-weight: 700; font-size: 0.95rem;
+  box-shadow: 0 8px 30px rgba(99,102,241,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(99,102,241,0.6); }
+.btn-outline {
+  padding: 14px 30px; border-radius: var(--radius-md);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: #fff; font-weight: 600; font-size: 0.95rem;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.06);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+}
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: rgba(255,255,255,0.4); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.1em;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-6px); } }
+
+/* ============================================================
+   STATS SECTION
+   ============================================================ */
+#stats {
+  background: var(--grad-main);
+  padding: 64px clamp(20px, 4vw, 48px);
+}
+.stats-grid {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 40px; text-align: center;
+}
+.stat-item { color: #fff; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800;
+  line-height: 1;
+}
+.stat-label { font-size: 0.9rem; opacity: 0.8; margin-top: 6px; font-weight: 400; }
+
+/* ============================================================
+   SECTION COMMONS
+   ============================================================ */
+section { padding: var(--section-pad) clamp(20px, 4vw, 48px); }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--c-indigo);
+  margin-bottom: 16px;
+}
+.section-label::before {
+  content: ''; display: block; width: 20px; height: 2px;
+  background: var(--grad-main); border-radius: 2px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+  color: var(--c-heading); line-height: 1.15; letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 1.05rem; color: var(--c-muted); max-width: 540px;
+  line-height: 1.7; font-weight: 300;
+}
+.section-head { margin-bottom: 56px; }
+
+/* Reveal animation */
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+#about { background: var(--c-surface); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px); align-items: center;
+}
+.about-text p {
+  color: var(--c-muted); line-height: 1.8; margin-bottom: 16px;
+  font-size: 1rem; font-weight: 300;
+}
+.skills-wrap { margin-top: 32px; }
+.skills-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--c-muted); margin-bottom: 14px;
+}
+.skills-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-chip {
+  padding: 6px 14px; border-radius: 99px;
+  font-size: 0.82rem; font-weight: 600;
+  border: 1.5px solid var(--c-border);
+  color: var(--c-indigo); background: var(--c-surface2);
+  transition: background 0.2s, border-color 0.2s;
+}
+.skill-chip:hover { background: var(--grad-subtle); border-color: var(--c-indigo); }
+
+/* Team Cards */
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.team-card {
+  background: var(--grad-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(10px);
+}
+.team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.team-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--grad-main);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;
+  color: #fff; margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(99,102,241,0.4);
+}
+.team-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700; color: var(--c-heading); margin-bottom: 4px;
+}
+.team-role {
+  font-size: 0.82rem; color: var(--c-indigo); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.team-desc { font-size: 0.88rem; color: var(--c-muted); margin-top: 10px; line-height: 1.6; }
+
+/* ============================================================
+   SERVICES SECTION
+   ============================================================ */
+#services { background: var(--c-bg); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.service-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad-main); opacity: 0;
+  transition: opacity 0.3s;
+}
+.service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: rgba(99,102,241,0.25); }
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 52px; height: 52px; border-radius: var(--radius-md);
+  background: var(--grad-subtle);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-indigo); margin-bottom: 20px;
+  transition: background 0.3s;
+}
+.service-card:hover .service-icon { background: var(--grad-main); color: #fff; }
+.service-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 700; color: var(--c-heading); margin-bottom: 12px;
+}
+.service-list { display: flex; flex-direction: column; gap: 8px; }
+.service-list li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.9rem; color: var(--c-muted);
+}
+.service-list li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--grad-main); flex-shrink: 0;
+}
+
+/* ============================================================
+   PORTFOLIO SECTION
+   ============================================================ */
+#portfolio { background: var(--c-surface); }
+.portfolio-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+.project-card {
+  background: var(--c-surface2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.project-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
+.project-thumb {
+  position: relative; height: 200px; overflow: hidden;
+  background: var(--grad-main);
+}
+.project-thumb-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.9);
+  position: relative;
+  background: var(--grad-main);
+  overflow: hidden;
+}
+.project-thumb-inner::after {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.project-img-placeholder {
+  width: 80px; height: 80px; border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.8);
+}
+.project-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.project-card:hover .project-overlay { opacity: 1; }
+.overlay-btn {
+  padding: 9px 18px; border-radius: var(--radius-sm);
+  font-size: 0.8rem; font-weight: 700;
+  transition: transform 0.2s;
+}
+.overlay-btn.primary { background: var(--grad-main); color: #fff; }
+.overlay-btn.secondary { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+.overlay-btn:hover { transform: scale(1.05); }
+.project-info { padding: 22px; }
+.project-name {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700; color: var(--c-heading); margin-bottom: 8px;
+}
+.project-desc { font-size: 0.87rem; color: var(--c-muted); line-height: 1.6; margin-bottom: 14px; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  padding: 3px 10px; border-radius: 99px;
+  font-size: 0.75rem; font-weight: 600;
+  background: var(--c-surface2); color: var(--c-indigo);
+  border: 1px solid var(--c-border);
+}
+[data-theme="dark"] .tag { background: rgba(99,102,241,0.12); }
+
+/* ============================================================
+   DESIGN GALLERY
+   ============================================================ */
+#gallery { background: var(--c-bg); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.gallery-item {
+  border-radius: var(--radius-md); overflow: hidden;
+  position: relative; cursor: pointer;
+  aspect-ratio: 4/3;
+  background: var(--grad-main);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.gallery-item:hover { transform: scale(1.03); box-shadow: var(--shadow-lg); }
+.gallery-thumb {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+  color: rgba(255,255,255,0.9);
+  font-size: 0.85rem; font-weight: 600;
+  background: var(--grad-main);
+}
+.gallery-bg-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.gallery-bg-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.gallery-bg-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.gallery-bg-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+.gallery-bg-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+.gallery-bg-6 { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+.gallery-hover {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+  color: #fff;
+}
+.gallery-item:hover .gallery-hover { opacity: 1; }
+
+/* Lightbox */
+#lightbox {
+  position: fixed; inset: 0; z-index: 9998;
+  background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
+  display: none; align-items: center; justify-content: center;
+}
+#lightbox.open { display: flex; }
+.lightbox-inner {
+  max-width: 700px; width: 90%;
+  border-radius: var(--radius-xl);
+  overflow: hidden; position: relative;
+  aspect-ratio: 4/3;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+}
+.lightbox-close {
+  position: absolute; top: 16px; right: 16px; z-index: 1;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0,0,0,0.5); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; transition: background 0.2s;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.1); }
+
+/* ============================================================
+   WHY CHOOSE US
+   ============================================================ */
+#why { background: var(--c-surface); }
+.why-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+.why-card {
+  background: var(--grad-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+.why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.why-icon {
+  width: 56px; height: 56px;
+  background: var(--grad-subtle); border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; color: var(--c-indigo);
+  transition: background 0.3s;
+}
+.why-card:hover .why-icon { background: var(--grad-main); color: #fff; }
+.why-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--c-heading); margin-bottom: 8px; }
+.why-desc { font-size: 0.87rem; color: var(--c-muted); line-height: 1.6; }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+#testimonials { background: var(--c-bg); }
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.testi-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.testi-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.testi-quote {
+  font-size: 3rem; line-height: 1; color: var(--c-indigo);
+  opacity: 0.3; position: absolute; top: 16px; right: 20px;
+  font-family: Georgia, serif;
+}
+.testi-stars { display: flex; gap: 3px; margin-bottom: 14px; }
+.star { color: #f59e0b; font-size: 0.9rem; }
+.testi-text {
+  font-size: 0.93rem; color: var(--c-muted); line-height: 1.7;
+  margin-bottom: 20px; font-style: italic;
+}
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--grad-main);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: #fff;
+}
+.testi-name { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; color: var(--c-heading); }
+.testi-biz { font-size: 0.78rem; color: var(--c-muted); }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+#faq { background: var(--c-surface); }
+.faq-wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  background: var(--c-surface2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+}
+.faq-item:hover { box-shadow: var(--shadow-md); }
+.faq-q {
+  padding: 18px 22px; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font-weight: 600; font-size: 0.95rem; color: var(--c-heading);
+  user-select: none;
+}
+.faq-q .faq-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--c-surface); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-indigo);
+  transition: transform 0.3s, background 0.3s;
+}
+.faq-item.open .faq-q .faq-icon { transform: rotate(45deg); background: var(--c-indigo); color: #fff; }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.faq-item.open .faq-a { max-height: 200px; }
+.faq-a-inner {
+  padding: 0 22px 18px;
+  font-size: 0.9rem; color: var(--c-muted); line-height: 1.7;
+}
+
+/* ============================================================
+   CTA BANNER
+   ============================================================ */
+#cta-banner {
+  background: var(--grad-hero);
+  padding: 80px clamp(20px, 4vw, 48px);
+  position: relative; overflow: hidden;
+}
+.cta-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); pointer-events: none;
+}
+.cta-orb-1 {
+  width: 300px; height: 300px;
+  background: rgba(99,102,241,0.4);
+  top: -60px; left: -60px;
+}
+.cta-orb-2 {
+  width: 250px; height: 250px;
+  background: rgba(168,85,247,0.35);
+  bottom: -50px; right: -50px;
+}
+.cta-inner {
+  max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 1;
+}
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+  color: #fff; letter-spacing: -0.03em; margin-bottom: 16px;
+}
+.cta-sub { color: rgba(255,255,255,0.7); font-size: 1.05rem; margin-bottom: 36px; font-weight: 300; }
+.cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
+#contact { background: var(--c-bg); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(40px, 6vw, 80px); }
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-card {
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  border-radius: var(--radius-md); padding: 20px 22px;
+  display: flex; align-items: flex-start; gap: 14px;
+  box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s;
+}
+.contact-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.contact-icon {
+  width: 44px; height: 44px; border-radius: var(--radius-sm); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--grad-subtle); color: var(--c-indigo);
+}
+.contact-card-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; color: var(--c-muted); text-transform: uppercase; }
+.contact-card-val { font-size: 0.92rem; font-weight: 600; color: var(--c-heading); margin-top: 3px; }
+.social-links { display: flex; gap: 12px; margin-top: 8px; }
+.social-link {
+  width: 40px; height: 40px; border-radius: var(--radius-sm);
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-muted); transition: background 0.2s, color 0.2s, border-color 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+.social-link:hover { background: var(--grad-main); color: #fff; border-color: transparent; }
+
+/* Contact Form */
+.contact-form {
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  border-radius: var(--radius-xl); padding: 36px 32px;
+  box-shadow: var(--shadow-md);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.form-label { font-size: 0.82rem; font-weight: 700; color: var(--c-muted); letter-spacing: 0.06em; }
+.form-input, .form-select, .form-textarea {
+  padding: 12px 16px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--c-border);
+  background: var(--c-bg); color: var(--c-text);
+  font-family: var(--font-body); font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--c-indigo);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-submit {
+  width: 100%; padding: 14px 28px;
+  background: var(--grad-main); color: #fff;
+  font-weight: 700; font-size: 0.95rem; border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.form-submit:hover { opacity: 0.92; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(99,102,241,0.45); }
+.form-success {
+  display: none; text-align: center; padding: 20px;
+  color: #10b981; font-weight: 600; font-size: 0.95rem;
+}
+.form-success.visible { display: block; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: #070712; color: rgba(255,255,255,0.7);
+  padding: 64px clamp(20px, 4vw, 48px) 28px;
+}
+.footer-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-brand .nav-logo { display: block; margin-bottom: 16px; font-size: 1.5rem; }
+.footer-brand p { font-size: 0.88rem; line-height: 1.7; max-width: 260px; }
+.footer-social { display: flex; gap: 10px; margin-top: 20px; }
+.footer-social-btn {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.6);
+  transition: background 0.2s, color 0.2s;
+}
+.footer-social-btn:hover { background: var(--grad-main); color: #fff; border-color: transparent; }
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 18px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: 0.88rem; transition: color 0.2s;
+}
+.footer-links a:hover { color: #a5b4fc; }
+.footer-bottom {
+  max-width: 1200px; margin: 0 auto;
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  font-size: 0.82rem;
+}
+.footer-bottom span { color: #a5b4fc; }
+
+/* ============================================================
+   FLOATING WHATSAPP
+   ============================================================ */
+#wa-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 900;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+}
+.wa-tooltip {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.82rem; font-weight: 600; color: var(--c-heading);
+  box-shadow: var(--shadow-md); white-space: nowrap;
+  opacity: 0; transform: translateX(10px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+#wa-float:hover .wa-tooltip { opacity: 1; transform: none; }
+.wa-btn {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 8px 24px rgba(37,211,102,0.5);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: waPulse 3s ease infinite;
+}
+.wa-btn:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37,211,102,0.6); }
+@keyframes waPulse {
+  0%,100% { box-shadow: 0 8px 24px rgba(37,211,102,0.5); }
+  50% { box-shadow: 0 8px 30px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.08); }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (max-width: 480px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; align-items: stretch; }
+  .hero-btns a { text-align: center; justify-content: center; }
+  .contact-form { padding: 24px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">PixelCraft Studio</div>
+  <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<div id="wa-float">
+  <div class="wa-tooltip">Chat with us on WhatsApp!</div>
+  <a href="https://wa.me/919999999999" target="_blank" class="wa-btn" aria-label="WhatsApp">
+    <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">PixelCraft<span style="opacity:0.5">.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+        <i data-lucide="sun" width="18" height="18" id="sun-icon"></i>
+        <i data-lucide="moon" width="18" height="18" id="moon-icon" style="display:none"></i>
+      </button>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#testimonials">Reviews</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact" style="color:var(--c-indigo);font-weight:700;">Get a Quote →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="particles" id="particles"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span></span>
+      Student Freelance Studio — Open for Projects
+    </div>
+    <h1 class="hero-title">
+      We Build Websites That Help<br>
+      <span class="gradient-text">Businesses Grow</span>
+    </h1>
+    <p class="hero-desc">
+      From modern business websites to eye-catching Canva designs — we deliver professional digital solutions crafted for small businesses, startups, and local shops.
+    </p>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn-primary">
+        <i data-lucide="layout-grid" width="18" height="18"></i>
+        View Portfolio
+      </a>
+      <a href="#contact" class="btn-outline">
+        <i data-lucide="mail" width="18" height="18"></i>
+        Contact Us
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <i data-lucide="chevrons-down" width="20" height="20"></i>
+    SCROLL
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="30">0</div>
+      <div class="stat-label">Projects Completed</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="25">0</div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="50">0</div>
+      <div class="stat-label">Designs Created</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="100">0</div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Two Passionate Creators, One Studio</h2>
+        <p>We're a two-person student freelance team driven by a love for clean design and functional code. What started as a passion project has grown into a studio that helps real businesses get online and look great.</p>
+        <p>We specialize in building modern, mobile-responsive websites and creating scroll-stopping graphic designs — all delivered on time, within budget, and built to impress your customers.</p>
+        <p style="font-weight:600; color:var(--c-indigo)">🎯 Our Mission: Help small businesses, local shops, and startups establish a powerful online presence without breaking the bank.</p>
+        <div class="skills-wrap">
+          <div class="skills-title">Our Skill Set</div>
+          <div class="skills-chips">
+            <span class="skill-chip">HTML5</span>
+            <span class="skill-chip">CSS3</span>
+            <span class="skill-chip">JavaScript</span>
+            <span class="skill-chip">PHP</span>
+            <span class="skill-chip">Canva Pro</span>
+            <span class="skill-chip">Responsive Design</span>
+            <span class="skill-chip">SEO Basics</span>
+            <span class="skill-chip">UI/UX</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-grid reveal">
+        <div class="team-card">
+          <div class="team-avatar">J</div>
+          <div class="team-name">Justin Saju</div>
+          <div class="team-role">Web Developer</div>
+          <div class="team-desc">Frontend specialist with a passion for clean code and smooth animations. Builds responsive, blazing-fast websites from scratch.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background: linear-gradient(135deg,#a855f7,#ec4899)">S</div>
+          <div class="team-name">Siya Abhi</div>
+          <div class="team-role">Graphic Designer</div>
+          <div class="team-desc">Canva power-user and visual storyteller. Creates stunning brand assets, social media content, and marketing materials.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">What We Offer</h2>
+      <p class="section-sub">Comprehensive digital solutions tailored for businesses at every stage of growth.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon"><i data-lucide="code-2" width="24" height="24"></i></div>
+        <div class="service-title">Website Development</div>
+        <ul class="service-list">
+          <li>Business Websites</li>
+          <li>Portfolio Websites</li>
+          <li>Landing Pages</li>
+          <li>E-Commerce Stores</li>
+          <li>College Project Websites</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon"><i data-lucide="palette" width="24" height="24"></i></div>
+        <div class="service-title">Graphic Design</div>
+        <ul class="service-list">
+          <li>Canva Posters & Flyers</li>
+          <li>Instagram Posts & Stories</li>
+          <li>Event Flyers</li>
+          <li>Business Cards</li>
+          <li>Marketing Creatives</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon"><i data-lucide="smartphone" width="24" height="24"></i></div>
+        <div class="service-title">Mobile-First Design</div>
+        <ul class="service-list">
+          <li>Fully Responsive Layouts</li>
+          <li>Touch-Friendly Interfaces</li>
+          <li>Performance Optimized</li>
+          <li>Cross-Browser Compatible</li>
+          <li>Speed & SEO Optimized</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon"><i data-lucide="bar-chart-2" width="24" height="24"></i></div>
+        <div class="service-title">Brand Identity</div>
+        <ul class="service-list">
+          <li>Logo Design</li>
+          <li>Brand Color Palette</li>
+          <li>Social Media Branding Kit</li>
+          <li>Letterheads & Stationery</li>
+          <li>Menu & Catalog Design</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Our Recent Projects</h2>
+      <p class="section-sub">A selection of websites we've built for businesses across different industries.</p>
+    </div>
+    <div class="portfolio-grid">
+      <!-- Card 1 -->
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-inner" style="background:linear-gradient(135deg,#667eea,#764ba2)">
+            <div class="project-img-placeholder"><i data-lucide="graduation-cap" width="36" height="36"></i></div>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn primary">Live Demo</a>
+              <a href="#" class="overlay-btn secondary">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-name">Sunrise Tuition Center</div>
+          <div class="project-desc">A modern tuition center website with course listings, teacher profiles, inquiry form and student testimonials.</div>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">PHP</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-inner" style="background:linear-gradient(135deg,#f093fb,#f5576c)">
+            <div class="project-img-placeholder"><i data-lucide="cake" width="36" height="36"></i></div>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn primary">Live Demo</a>
+              <a href="#" class="overlay-btn secondary">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-name">Sweet Dreams Bakery</div>
+          <div class="project-desc">Elegant bakery website featuring a product gallery, online order form, and WhatsApp order integration for local delivery.</div>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-inner" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">
+            <div class="project-img-placeholder"><i data-lucide="sparkles" width="36" height="36"></i></div>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn primary">Live Demo</a>
+              <a href="#" class="overlay-btn secondary">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-name">Glow Beauty Parlour</div>
+          <div class="project-desc">Beauty parlour website with service menu, before/after gallery, booking form, and Google Maps integration.</div>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-inner" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">
+            <div class="project-img-placeholder"><i data-lucide="utensils" width="36" height="36"></i></div>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn primary">Live Demo</a>
+              <a href="#" class="overlay-btn secondary">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-name">Spice Route Restaurant</div>
+          <div class="project-desc">Restaurant website with digital menu, table reservation system, photo gallery, and customer review section.</div>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">PHP</span><span class="tag">MySQL</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-inner" style="background:linear-gradient(135deg,#fa709a,#fee140)">
+            <div class="project-img-placeholder"><i data-lucide="user-circle" width="36" height="36"></i></div>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn primary">Live Demo</a>
+              <a href="#" class="overlay-btn secondary">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-name">Personal Portfolio – Dev</div>
+          <div class="project-desc">Animated personal portfolio with skills section, project showcase, timeline, and a contact form. Dark mode included.</div>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-inner" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)">
+            <div class="project-img-placeholder"><i data-lucide="shopping-bag" width="36" height="36"></i></div>
+            <div class="project-overlay">
+              <a href="#" class="overlay-btn primary">Live Demo</a>
+              <a href="#" class="overlay-btn secondary">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-name">StyleShop – Boutique</div>
+          <div class="project-desc">Fashion boutique landing page with product cards, Instagram feed embed, WhatsApp shop link and seasonal offers banner.</div>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="section-label">Design Gallery</div>
+      <h2 class="section-title">Graphic Design Work</h2>
+      <p class="section-sub">From festival posters to social media content — scroll-stopping visuals made with Canva.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item gallery-bg-1 reveal" onclick="openLightbox(this)">
+        <div class="gallery-thumb gallery-bg-1">
+          <i data-lucide="sun" width="40" height="40"></i>
+          <span>Festival Poster</span>
+        </div>
+        <div class="gallery-hover"><i data-lucide="zoom-in" width="28" height="28"></i></div>
+      </div>
+      <div class="gallery-item gallery-bg-2 reveal" onclick="openLightbox(this)">
+        <div class="gallery-thumb gallery-bg-2">
+          <i data-lucide="instagram" width="40" height="40"></i>
+          <span>Instagram Post</span>
+        </div>
+        <div class="gallery-hover"><i data-lucide="zoom-in" width="28" height="28"></i></div>
+      </div>
+      <div class="gallery-item gallery-bg-3 reveal" onclick="openLightbox(this)">
+        <div class="gallery-thumb gallery-bg-3">
+          <i data-lucide="megaphone" width="40" height="40"></i>
+          <span>Promo Banner</span>
+        </div>
+        <div class="gallery-hover"><i data-lucide="zoom-in" width="28" height="28"></i></div>
+      </div>
+      <div class="gallery-item gallery-bg-4 reveal" onclick="openLightbox(this)">
+        <div class="gallery-thumb gallery-bg-4">
+          <i data-lucide="calendar" width="40" height="40"></i>
+          <span>Event Poster</span>
+        </div>
+        <div class="gallery-hover"><i data-lucide="zoom-in" width="28" height="28"></i></div>
+      </div>
+      <div class="gallery-item gallery-bg-5 reveal" onclick="openLightbox(this)">
+        <div class="gallery-thumb gallery-bg-5">
+          <i data-lucide="tag" width="40" height="40"></i>
+          <span>Product Ad</span>
+        </div>
+        <div class="gallery-hover"><i data-lucide="zoom-in" width="28" height="28"></i></div>
+      </div>
+      <div class="gallery-item gallery-bg-6 reveal" onclick="openLightbox(this)">
+        <div class="gallery-thumb gallery-bg-6">
+          <i data-lucide="layout-template" width="40" height="40"></i>
+          <span>Social Media Kit</span>
+        </div>
+        <div class="gallery-hover"><i data-lucide="zoom-in" width="28" height="28"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-inner" id="lightboxContent" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="section-inner">
+    <div class="section-head reveal" style="text-align:center">
+      <div class="section-label" style="justify-content:center">Why Us</div>
+      <h2 class="section-title">Why Choose PixelCraft Studio?</h2>
+      <p class="section-sub" style="margin:0 auto">We combine student energy with professional quality — giving you big agency results at freelance prices.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon"><i data-lucide="indian-rupee" width="24" height="24"></i></div>
+        <div class="why-title">Affordable Pricing</div>
+        <div class="why-desc">Premium quality at student-friendly prices. Transparent rates with no hidden charges.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><i data-lucide="sparkles" width="24" height="24"></i></div>
+        <div class="why-title">Modern Design</div>
+        <div class="why-desc">Trendy, clean aesthetics built to impress visitors and convert them into customers.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><i data-lucide="smartphone" width="24" height="24"></i></div>
+        <div class="why-title">Mobile Responsive</div>
+        <div class="why-desc">Every project is built mobile-first, looking pixel-perfect on all screen sizes.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><i data-lucide="zap" width="24" height="24"></i></div>
+        <div class="why-title">Fast Delivery</div>
+        <div class="why-desc">Most projects delivered within 3–7 days without compromising on quality.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><i data-lucide="headphones" width="24" height="24"></i></div>
+        <div class="why-title">Friendly Support</div>
+        <div class="why-desc">Real-time updates via WhatsApp. We're always just a message away.</div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><i data-lucide="settings-2" width="24" height="24"></i></div>
+        <div class="why-title">Custom Solutions</div>
+        <div class="why-desc">No templates. Every project is built from scratch, tailored to your business needs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-head reveal" style="text-align:center">
+      <div class="section-label" style="justify-content:center">Testimonials</div>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="section-sub" style="margin:0 auto">Real feedback from real businesses we've helped grow online.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">PixelCraft built our tuition center website in just 5 days! Parents love the clean layout and our inquiries have doubled since launch. Highly recommend these talented students!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">Ramesh Menon</div>
+            <div class="testi-biz">Sunrise Tuition Center, Kochi</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">The Instagram posts Sara designed for our bakery get so many likes and inquiries now! She understood our brand instantly and delivered beautiful designs within 24 hours.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">P</div>
+          <div>
+            <div class="testi-name">Priya Thomas</div>
+            <div class="testi-biz">Sweet Dreams Bakery, Thrissur</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testi-text">Very professional service! Our restaurant website looks better than some big company websites I've seen. Affordable pricing and they explain everything clearly. Will use again!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">M</div>
+          <div>
+            <div class="testi-name">Mohammed Rafiq</div>
+            <div class="testi-biz">Spice Route Restaurant, Kozhikode</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-head reveal" style="text-align:center">
+      <div class="section-label" style="justify-content:center">FAQ</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub" style="margin:0 auto">Everything you want to know before working with us.</p>
+    </div>
+    <div class="faq-wrap reveal">
+      <div class="faq-item">
+        <div class="faq-q">
+          How long does it take to build a website?
+          <div class="faq-icon"><i data-lucide="plus" width="14" height="14"></i></div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Most simple business websites and landing pages are delivered within 3–5 days. Larger projects with custom features (booking systems, databases, etc.) typically take 7–14 days. We provide a clear timeline before starting any project.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          How much does a website cost?
+          <div class="faq-icon"><i data-lucide="plus" width="14" height="14"></i></div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Our pricing starts from ₹999 for simple landing pages and goes up based on features, number of pages, and complexity. Contact us with your requirements and we'll give you a detailed, no-obligation quote.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Can I get both a website and graphic designs?
+          <div class="faq-icon"><i data-lucide="plus" width="14" height="14"></i></div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Absolutely! We offer combo packages where you get your website built plus a full set of social media graphics, posters, and marketing materials — all at a bundled discount.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Will my website work on mobile phones?
+          <div class="faq-icon"><i data-lucide="plus" width="14" height="14"></i></div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes, always! Every website we build is 100% mobile responsive — it will look and work perfectly on smartphones, tablets, and desktops. We test on multiple devices before delivery.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Do you offer revisions?
+          <div class="faq-icon"><i data-lucide="plus" width="14" height="14"></i></div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes! We offer up to 3 free revisions on every project. Your satisfaction is our priority, and we won't consider a project complete until you're happy with the result.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          How do I get started?
+          <div class="faq-icon"><i data-lucide="plus" width="14" height="14"></i></div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Simply fill out the contact form below or message us directly on WhatsApp. We'll get back within a few hours to discuss your requirements, timeline, and pricing. It's that easy!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta-banner">
+  <div class="cta-orb cta-orb-1"></div>
+  <div class="cta-orb cta-orb-2"></div>
+  <div class="cta-inner reveal">
+    <h2 class="cta-title">Ready to Grow Your Business Online?</h2>
+    <p class="cta-sub">Let's build something great together. Get a free quote within 2 hours — no commitment required.</p>
+    <div class="cta-btns">
+      <a href="#contact" class="btn-primary">
+        <i data-lucide="rocket" width="18" height="18"></i>
+        Start Your Project
+      </a>
+      <a href="https://wa.me/919999999999" target="_blank" class="btn-outline">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-sub">Have a project in mind? Fill out the form and we'll respond within a few hours.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-card">
+          <div class="contact-icon"><i data-lucide="mail" width="20" height="20"></i></div>
+          <div>
+            <div class="contact-card-label">Email</div>
+            <div class="contact-card-val">hello@pixelcraftstudio.in</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i data-lucide="phone" width="20" height="20"></i></div>
+          <div>
+            <div class="contact-card-label">Phone / WhatsApp</div>
+            <div class="contact-card-val">+91 99999 99999</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i data-lucide="map-pin" width="20" height="20"></i></div>
+          <div>
+            <div class="contact-card-label">Location</div>
+            <div class="contact-card-val">Kerala, India (Remote Services)</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i data-lucide="clock" width="20" height="20"></i></div>
+          <div>
+            <div class="contact-card-label">Response Time</div>
+            <div class="contact-card-val">Usually within 2–3 hours</div>
+          </div>
+        </div>
+        <div>
+          <div class="contact-card-label" style="margin-bottom:12px">Follow Us</div>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i data-lucide="instagram" width="18" height="18"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <i data-lucide="linkedin" width="18" height="18"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="GitHub">
+              <i data-lucide="github" width="18" height="18"></i>
+            </a>
+            <a href="https://wa.me/919999999999" target="_blank" class="social-link" aria-label="WhatsApp" style="background:#e7fdf0;color:#25d366;border-color:#d1f5e0">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="contact-form">
+          <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--c-heading);margin-bottom:24px">Send Us a Message</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-input" placeholder="John Doe" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone / WhatsApp</label>
+              <input type="tel" class="form-input" placeholder="+91 98765 43210" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Service Needed</label>
+            <select class="form-select">
+              <option value="">Select a service...</option>
+              <option>Business Website</option>
+              <option>Portfolio Website</option>
+              <option>Landing Page</option>
+              <option>E-Commerce Store</option>
+              <option>College Project Website</option>
+              <option>Graphic Design (Canva)</option>
+              <option>Combo – Website + Graphics</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Project Details</label>
+            <textarea class="form-textarea" placeholder="Describe your project, budget, and any specific requirements..."></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">
+            <i data-lucide="send" width="18" height="18"></i>
+            Send Message
+          </button>
+          <div class="form-success" id="formSuccess">
+            ✅ Message sent! We'll get back to you within 2–3 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">PixelCraft<span style="opacity:0.4">.</span></span>
+      <p>A student freelance studio creating professional websites and graphic designs for businesses that want to stand out online.</p>
+      <div class="footer-social">
+        <a href="#" class="footer-social-btn" aria-label="Instagram"><i data-lucide="instagram" width="16" height="16"></i></a>
+        <a href="#" class="footer-social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" width="16" height="16"></i></a>
+        <a href="#" class="footer-social-btn" aria-label="GitHub"><i data-lucide="github" width="16" height="16"></i></a>
+        <a href="https://wa.me/919999999999" class="footer-social-btn" aria-label="WhatsApp">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#gallery">Design Gallery</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Business Websites</a></li>
+        <li><a href="#services">Portfolio Sites</a></li>
+        <li><a href="#services">Landing Pages</a></li>
+        <li><a href="#services">Canva Design</a></li>
+        <li><a href="#services">Brand Identity</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="mailto:hello@pixelcraftstudio.in">hello@pixelcraftstudio.in</a></li>
+        <li><a href="tel:+919999999999">+91 99999 99999</a></li>
+        <li><a href="https://wa.me/919999999999" target="_blank">WhatsApp Us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 <span>PixelCraft Studio</span>. All rights reserved.</div>
+    <div>Made with ❤️ by <span>Justin & Siya</span> — Kerala, India</div>
+  </div>
+</footer>
+
+<script>
+// Init Lucide Icons
+lucide.createIcons();
+
+// ---- LOADER ----
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 2000);
+});
+
+// ---- PARTICLES ----
+(function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${size}px; height: ${size}px;
+      animation-duration: ${Math.random() * 15 + 10}s;
+      animation-delay: ${Math.random() * -20}s;
+    `;
+    container.appendChild(p);
+  }
+})();
+
+// ---- NAVBAR SCROLL ----
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ---- HAMBURGER ----
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+});
+mobileNav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  });
+});
+
+// ---- DARK MODE ----
+const themeToggle = document.getElementById('themeToggle');
+const sunIcon = document.getElementById('sun-icon');
+const moonIcon = document.getElementById('moon-icon');
+const html = document.documentElement;
+
+function setTheme(dark) {
+  html.setAttribute('data-theme', dark ? 'dark' : 'light');
+  sunIcon.style.display = dark ? 'none' : '';
+  moonIcon.style.display = dark ? '' : 'none';
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+  lucide.createIcons();
+}
+// Init
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') setTheme(true);
+
+themeToggle.addEventListener('click', () => {
+  setTheme(html.getAttribute('data-theme') !== 'dark');
+});
+
+// ---- SCROLL REVEAL ----
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 60);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ---- ANIMATED COUNTERS ----
+const statNums = document.querySelectorAll('.stat-num[data-target]');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.target === '100' ? '%' : '+';
+      let current = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current) + suffix;
+        if (current >= target) clearInterval(timer);
+      }, 20);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+statNums.forEach(el => countObserver.observe(el));
+
+// ---- FAQ ACCORDION ----
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+    lucide.createIcons();
+  });
+});
+
+// ---- LIGHTBOX ----
+function openLightbox(el) {
+  const lb = document.getElementById('lightbox');
+  const content = document.getElementById('lightboxContent');
+  const clone = el.querySelector('.gallery-thumb').cloneNode(true);
+  clone.style.cssText = 'width:100%;height:100%;';
+  content.innerHTML = '';
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'lightbox-close';
+  closeBtn.innerHTML = '✕';
+  closeBtn.onclick = closeLightbox;
+  content.appendChild(closeBtn);
+  content.appendChild(clone);
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  lucide.createIcons();
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ---- FORM SUBMIT ----
+function submitForm() {
+  const success = document.getElementById('formSuccess');
+  success.classList.add('visible');
+  setTimeout(() => success.classList.remove('visible'), 5000);
+}
+
+// ---- SMOOTH ANCHOR ----
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>

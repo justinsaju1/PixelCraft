@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière Dance Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0b0a;
+    --cream: #f5f0e8;
+    --warm: #e8dece;
+    --gold: #c9a84c;
+    --rose: #c4706a;
+    --sage: #7a8c7e;
+    --text: #2a2420;
+    --muted: #8a7e76;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+    transition: padding 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem; font-weight: 300; letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text); text-decoration: none; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--ink); color: var(--cream);
+    padding: 0.6rem 1.5rem; font-size: 0.78rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--ink); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--ink); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+    position: relative;
+  }
+  .hero-left::before {
+    content: 'DANCE';
+    position: absolute; top: 50%; left: -2rem;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem; font-weight: 300;
+    color: rgba(201,168,76,0.07); letter-spacing: 0.3em;
+    pointer-events: none; white-space: nowrap;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.4rem; font-weight: 500;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--gold); }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 1.08;
+    color: var(--ink); margin-bottom: 1.6rem;
+  }
+  h1 em { font-style: italic; color: var(--rose); }
+  .hero-sub {
+    font-size: 1rem; line-height: 1.7; color: var(--muted);
+    max-width: 34ch; margin-bottom: 2.8rem; font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink); color: var(--cream);
+    padding: 0.9rem 2.2rem; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    transition: all 0.25s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); color: var(--ink); }
+  .btn-outline {
+    border: 1px solid var(--ink); color: var(--ink);
+    padding: 0.9rem 2.2rem; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    transition: all 0.25s; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 3rem; border-top: 1px solid rgba(201,168,76,0.25);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: var(--ink); line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: var(--ink);
+  }
+  .hero-img-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100%; gap: 3px;
+  }
+  .hero-img-cell {
+    overflow: hidden; position: relative;
+    background: #1a1612;
+  }
+  .hero-img-cell:first-child { grid-row: span 2; }
+  .hero-img-cell .dancer-svg {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .hero-badge {
+    position: absolute; bottom: 2rem; left: 2rem;
+    background: var(--gold); color: var(--ink);
+    padding: 1rem 1.4rem;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+  }
+
+  /* ── DANCER SVG PLACEHOLDERS ── */
+  .dancer-canvas {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 6rem; }
+  .section-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; font-weight: 500;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-eyebrow::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--gold); }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 3.5vw, 3.6rem);
+    font-weight: 300; line-height: 1.1; color: var(--ink);
+  }
+  h2 em { font-style: italic; color: var(--rose); }
+
+  /* ── ABOUT ── */
+  #about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 7rem 6rem;
+  }
+  #about .section-eyebrow { color: var(--gold); }
+  #about h2 { color: var(--cream); }
+  #about p { color: rgba(245,240,232,0.65); line-height: 1.8; margin-top: 1.5rem; font-weight: 300; }
+  .about-feats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .about-feat {
+    border-left: 2px solid var(--gold); padding-left: 1rem;
+  }
+  .about-feat strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300; color: var(--cream);
+    display: block;
+  }
+  .about-feat span { font-size: 0.75rem; color: rgba(245,240,232,0.5); letter-spacing: 0.06em; }
+  .about-right { position: relative; }
+  .about-img-frame {
+    aspect-ratio: 3/4; background: #1a1612;
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .about-img-frame::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(201,168,76,0.15), transparent);
+  }
+  .about-quote {
+    position: absolute; bottom: -1.5rem; left: -2rem;
+    background: var(--gold); color: var(--ink);
+    padding: 1.4rem 1.8rem; max-width: 20rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-style: italic; line-height: 1.5;
+    z-index: 2;
+  }
+
+  /* ── PROGRAMS ── */
+  #programs { background: var(--cream); }
+  .programs-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; }
+  .programs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px; background: rgba(10,8,6,0.1); }
+  .program-card {
+    background: var(--cream); padding: 2.5rem 2rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .program-card:hover { background: var(--ink); }
+  .program-card:hover * { color: var(--cream) !important; }
+  .program-card:hover .prog-icon { opacity: 0.15; }
+  .prog-icon {
+    font-size: 3.5rem; margin-bottom: 1.5rem;
+    line-height: 1; opacity: 0.35;
+    transition: opacity 0.3s;
+  }
+  .prog-age {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.5rem; font-weight: 500;
+  }
+  .prog-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: var(--ink);
+    margin-bottom: 1rem; line-height: 1.2;
+  }
+  .prog-items { list-style: none; }
+  .prog-items li {
+    font-size: 0.8rem; color: var(--muted); padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .prog-items li::before { content: '–'; color: var(--gold); }
+  .specialty-grid {
+    display: grid; grid-template-columns: repeat(6,1fr);
+    gap: 1px; background: rgba(10,8,6,0.1);
+    margin-top: 1.5px;
+  }
+  .specialty-chip {
+    background: var(--warm); padding: 1.2rem 1rem;
+    text-align: center; font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+    color: var(--text); cursor: default;
+    transition: background 0.2s, color 0.2s;
+  }
+  .specialty-chip:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── SCHEDULE ── */
+  #schedule {
+    background: var(--ink); color: var(--cream);
+    padding: 7rem 6rem;
+  }
+  #schedule .section-eyebrow { color: var(--gold); }
+  #schedule h2 { color: var(--cream); margin-bottom: 3rem; }
+  .schedule-table { width: 100%; border-collapse: collapse; }
+  .schedule-table th {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    text-align: left; font-weight: 500;
+  }
+  .schedule-table td {
+    padding: 1.1rem 1.5rem; font-size: 0.88rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: rgba(245,240,232,0.75);
+    transition: background 0.2s;
+  }
+  .schedule-table tr:hover td { background: rgba(201,168,76,0.07); }
+  .schedule-table .day-cell {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 400; color: var(--cream);
+  }
+  .tag {
+    display: inline-block; padding: 0.2rem 0.7rem;
+    font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(201,168,76,0.15); color: var(--gold);
+    margin: 0.15rem;
+  }
+  .schedule-footer {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+  }
+
+  /* ── INSTRUCTORS ── */
+  #instructors { background: var(--warm); }
+  .instructors-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3.5rem; }
+  .instructors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(10,8,6,0.07); }
+  .instructor-card { background: var(--warm); overflow: hidden; }
+  .instructor-photo {
+    aspect-ratio: 3/4; background: #c8bcaa;
+    position: relative; overflow: hidden;
+  }
+  .instructor-photo .silhouette { width: 100%; height: 100%; }
+  .instructor-info { padding: 1.8rem 1.5rem; }
+  .instructor-spec {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.4rem; font-weight: 500;
+  }
+  .instructor-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .instructor-bio { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+  .instructor-cert {
+    display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1rem;
+  }
+  .cert-tag {
+    font-size: 0.62rem; letter-spacing: 0.07em; text-transform: uppercase;
+    border: 1px solid rgba(122,140,126,0.4); color: var(--sage);
+    padding: 0.2rem 0.5rem;
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--cream); }
+  .testimonials-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; }
+  .testimonials-left h2 { margin-bottom: 1.5rem; }
+  .testimonials-left p { color: var(--muted); line-height: 1.7; font-weight: 300; }
+  .testimonial-cards { display: flex; flex-direction: column; gap: 1.5rem; }
+  .testimonial-card {
+    border-left: 3px solid var(--gold);
+    padding: 1.8rem 2rem; background: var(--warm);
+    position: relative;
+  }
+  .testimonial-quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; line-height: 0.5; color: var(--gold);
+    opacity: 0.3; position: absolute; top: 1rem; left: 1.5rem;
+    pointer-events: none;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; line-height: 1.6;
+    color: var(--ink); margin-bottom: 1.2rem;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+  .author-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--gold); opacity: 0.4;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .author-name { font-size: 0.8rem; font-weight: 500; color: var(--ink); }
+  .author-role { font-size: 0.7rem; color: var(--muted); }
+  .stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.1em; }
+
+  /* ── PRICING ── */
+  #pricing {
+    background: var(--ink); color: var(--cream);
+    padding: 7rem 6rem;
+  }
+  #pricing .section-eyebrow { color: var(--gold); }
+  #pricing h2 { color: var(--cream); margin-bottom: 3rem; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: rgba(201,168,76,0.15); }
+  .pricing-card {
+    background: #141210; padding: 3rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .pricing-card.featured { background: var(--gold); }
+  .pricing-card.featured * { color: var(--ink) !important; }
+  .pricing-card:not(.featured):hover { background: #1c1915; }
+  .plan-name {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(245,240,232,0.5); margin-bottom: 1.5rem; font-weight: 500;
+  }
+  .plan-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300; color: var(--cream); line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .plan-price sup { font-size: 1.4rem; vertical-align: super; }
+  .plan-period { font-size: 0.75rem; color: rgba(245,240,232,0.4); margin-bottom: 2rem; }
+  .plan-features { list-style: none; margin-bottom: 2.5rem; }
+  .plan-features li {
+    font-size: 0.82rem; color: rgba(245,240,232,0.7);
+    padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .plan-features li::before { content: '✓'; color: var(--gold); font-weight: 500; }
+  .pricing-card.featured .plan-features li::before { color: var(--ink); }
+  .btn-plan {
+    display: block; text-align: center;
+    padding: 0.85rem; font-size: 0.78rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    transition: all 0.25s;
+  }
+  .btn-plan-light { border: 1px solid rgba(201,168,76,0.4); color: var(--gold); }
+  .btn-plan-light:hover { background: var(--gold); color: var(--ink); }
+  .btn-plan-dark { background: var(--ink); color: var(--cream); border: 1px solid var(--ink); }
+  .btn-plan-dark:hover { background: #2a2420; }
+
+  /* ── EVENTS ── */
+  #events { background: var(--cream); }
+  .events-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+  .event-card {
+    border: 1px solid rgba(0,0,0,0.08); padding: 2rem;
+    transition: border-color 0.25s, transform 0.25s;
+    cursor: default;
+  }
+  .event-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .event-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--gold);
+    line-height: 1;
+  }
+  .event-month { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .event-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; color: var(--ink);
+    margin: 1rem 0 0.5rem;
+  }
+  .event-info { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+  .event-register {
+    display: inline-block; margin-top: 1.2rem;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; font-weight: 500;
+    border-bottom: 1px solid var(--gold); padding-bottom: 2px;
+  }
+
+  /* ── FAQ ── */
+  #faq {
+    background: var(--warm); padding: 7rem 6rem;
+  }
+  .faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; }
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+  .faq-item { border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .faq-question {
+    width: 100%; background: none; border: none;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 0; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem; font-weight: 500;
+    color: var(--ink); text-align: left;
+  }
+  .faq-question:hover { color: var(--gold); }
+  .faq-icon { font-size: 1.2rem; color: var(--gold); flex-shrink: 0; transition: transform 0.3s; }
+  .faq-answer {
+    font-size: 0.85rem; color: var(--muted); line-height: 1.7;
+    max-height: 0; overflow: hidden; transition: max-height 0.3s, padding 0.3s;
+    font-weight: 300;
+  }
+  .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.2rem; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--ink); color: var(--cream);
+    padding: 7rem 6rem;
+  }
+  #contact .section-eyebrow { color: var(--gold); }
+  #contact h2 { color: var(--cream); margin-bottom: 3rem; }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .form-field { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-field label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+  .form-field input, .form-field select, .form-field textarea {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    color: var(--cream); padding: 0.85rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    outline: none; transition: border-color 0.2s;
+    resize: none;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--gold); }
+  .form-field select option { background: #1a1612; }
+  .btn-submit {
+    background: var(--gold); color: var(--ink);
+    border: none; padding: 1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; cursor: pointer; align-self: flex-start;
+    transition: background 0.2s;
+  }
+  .btn-submit:hover { background: #e0bc5e; }
+  .contact-info { display: flex; flex-direction: column; gap: 2.5rem; }
+  .contact-detail { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .contact-icon { font-size: 1.3rem; opacity: 0.6; flex-shrink: 0; }
+  .contact-detail h4 { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+  .contact-detail p { font-size: 0.88rem; color: rgba(245,240,232,0.65); line-height: 1.6; font-weight: 300; }
+  .map-frame {
+    background: #1a1612; height: 180px;
+    border: 1px solid rgba(201,168,76,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(245,240,232,0.2); font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    overflow: hidden;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #090807; color: rgba(245,240,232,0.5);
+    padding: 4rem 6rem 2.5rem;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 2rem;
+  }
+  .footer-brand .nav-logo { font-size: 1.4rem; }
+  .footer-brand p { font-size: 0.8rem; line-height: 1.7; margin-top: 1rem; font-weight: 300; max-width: 28ch; }
+  .footer-col h5 { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-weight: 500; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a { font-size: 0.8rem; color: rgba(245,240,232,0.45); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .newsletter-row { display: flex; gap: 0; }
+  .newsletter-row input {
+    flex: 1; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08); border-right: none;
+    color: var(--cream); padding: 0.7rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.82rem; outline: none;
+  }
+  .newsletter-row button {
+    background: var(--gold); color: var(--ink); border: none;
+    padding: 0.7rem 1.2rem; cursor: pointer; font-size: 0.9rem;
+  }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 0.72rem; letter-spacing: 0.04em; }
+  .social-links { display: flex; gap: 1rem; }
+  .social-links a {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(245,240,232,0.35); text-decoration: none; transition: color 0.2s;
+  }
+  .social-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .animate-fadeup { animation: fadeUp 0.8s ease forwards; }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    section { padding: 5rem 2.5rem; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 5rem 2.5rem 3rem; }
+    .hero-right { min-height: 50vh; }
+    #about { grid-template-columns: 1fr; padding: 5rem 2.5rem; gap: 3rem; }
+    .programs-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .programs-grid { grid-template-columns: 1fr 1fr; }
+    .specialty-grid { grid-template-columns: repeat(3,1fr); }
+    #schedule { padding: 5rem 2.5rem; }
+    .instructors-header { grid-template-columns: 1fr; gap: 2rem; }
+    .instructors-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials-layout { grid-template-columns: 1fr; gap: 3rem; }
+    #pricing { padding: 5rem 2.5rem; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .events-grid { grid-template-columns: 1fr; }
+    #faq { padding: 5rem 2.5rem; }
+    .faq-layout { grid-template-columns: 1fr; gap: 3rem; }
+    #contact { padding: 5rem 2.5rem; }
+    .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 3rem 2.5rem 2rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .programs-grid { grid-template-columns: 1fr; }
+    .specialty-grid { grid-template-columns: repeat(2,1fr); }
+    .instructors-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .about-feats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">A<span>Studio</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Classes</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#instructors">Instructors</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book Trial</a>
+  <div class="nav-hamburger" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow animate-fadeup">Award-winning Academy</div>
+    <h1 class="animate-fadeup delay-1">Move.<br><em>Learn.</em><br>Perform.</h1>
+    <p class="hero-sub animate-fadeup delay-2">Professional dance training for kids, teens, and adults. Build confidence, creativity, and technique in an inspiring environment.</p>
+    <div class="hero-btns animate-fadeup delay-3">
+      <a href="#contact" class="btn-primary">Book a Free Trial</a>
+      <a href="#schedule" class="btn-outline">View Schedule</a>
+    </div>
+    <div class="hero-stats animate-fadeup delay-3">
+      <div>
+        <div class="stat-num">100<span style="color:var(--gold)">+</span></div>
+        <div class="stat-label">Students Trained</div>
+      </div>
+      <div>
+        <div class="stat-num">3<span style="color:var(--gold)">+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">10</div>
+        <div class="stat-label">Certified Instructors</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <!-- Main large panel -->
+      <div class="hero-img-cell">
+        <div class="dancer-canvas">
+          <svg viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;opacity:0.55;">
+            <defs>
+              <radialGradient id="bg1" cx="50%" cy="50%" r="70%">
+                <stop offset="0%" stop-color="#3a2e22"/>
+                <stop offset="100%" stop-color="#0d0b0a"/>
+              </radialGradient>
+            </defs>
+            <rect width="300" height="500" fill="url(#bg1)"/>
+            <!-- Ballet dancer silhouette -->
+            <g fill="rgba(201,168,76,0.25)" stroke="rgba(201,168,76,0.4)" stroke-width="1.5">
+              <!-- Head -->
+              <circle cx="155" cy="70" r="20" fill="rgba(245,232,210,0.18)" stroke="rgba(201,168,76,0.35)"/>
+              <!-- Body -->
+              <path d="M145,90 Q150,120 148,160 Q150,175 155,200" fill="none" stroke-width="2.5"/>
+              <!-- Tutu suggestion -->
+              <path d="M115,155 Q135,145 155,150 Q175,145 195,155 Q180,175 155,170 Q130,175 115,155Z" fill="rgba(196,112,106,0.15)" stroke="rgba(196,112,106,0.35)" stroke-width="1"/>
+              <!-- Arms arabesque -->
+              <path d="M148,115 Q120,100 90,85" fill="none" stroke-width="2.5" stroke="rgba(245,232,210,0.35)"/>
+              <path d="M152,115 Q180,108 215,115" fill="none" stroke-width="2.5" stroke="rgba(245,232,210,0.35)"/>
+              <!-- Legs -->
+              <path d="M148,200 Q140,240 128,290 Q120,330 105,370" fill="none" stroke-width="2.5" stroke="rgba(245,232,210,0.3)"/>
+              <path d="M158,200 Q165,245 175,285 Q185,325 200,365" fill="none" stroke-width="2.5" stroke="rgba(245,232,210,0.3)"/>
+              <!-- Pointe feet -->
+              <path d="M105,370 Q95,380 90,385" fill="none" stroke-width="2"/>
+              <path d="M200,365 Q210,375 215,383" fill="none" stroke-width="2"/>
+            </g>
+            <!-- Decorative gold lines -->
+            <line x1="20" y1="450" x2="280" y2="450" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+            <line x1="20" y1="50" x2="80" y2="50" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="hero-badge">Est. 2021 · Certified Studio</div>
+      </div>
+      <!-- Top right -->
+      <div class="hero-img-cell">
+        <div class="dancer-canvas" style="background:#1a150f;">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;opacity:0.6;">
+            <rect width="200" height="200" fill="#120f0a"/>
+            <g fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.5">
+              <!-- Hip-hop dancer pose -->
+              <circle cx="100" cy="45" r="15" stroke="rgba(245,232,210,0.3)"/>
+              <path d="M100,60 L100,115"/>
+              <path d="M100,75 L70,95 L50,80"/>
+              <path d="M100,75 L130,90 L155,75"/>
+              <path d="M100,115 L80,160 L65,185"/>
+              <path d="M100,115 L120,158 L138,183"/>
+            </g>
+            <text x="100" y="195" text-anchor="middle" font-size="8" fill="rgba(201,168,76,0.3)" font-family="serif" letter-spacing="3">HIP-HOP</text>
+          </svg>
+        </div>
+      </div>
+      <!-- Bottom right -->
+      <div class="hero-img-cell">
+        <div class="dancer-canvas" style="background:#0f1410;">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;opacity:0.6;">
+            <rect width="200" height="200" fill="#0a100d"/>
+            <g fill="none" stroke="rgba(122,140,126,0.55)" stroke-width="1.5">
+              <!-- Contemporary dancer -->
+              <circle cx="100" cy="40" r="14" stroke="rgba(245,232,210,0.3)"/>
+              <path d="M100,54 Q95,80 88,110 Q82,135 75,165"/>
+              <path d="M88,80 Q65,68 45,75"/>
+              <path d="M92,85 Q115,72 145,85"/>
+              <path d="M88,110 Q100,125 115,110"/>
+              <path d="M75,165 Q68,178 60,185"/>
+              <path d="M88,130 Q100,155 118,165 Q130,172 140,180"/>
+            </g>
+            <text x="100" y="196" text-anchor="middle" font-size="8" fill="rgba(122,140,126,0.4)" font-family="serif" letter-spacing="2">CONTEMPORARY</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <div class="section-eyebrow">Our Story</div>
+    <h2>Where Passion<br><em>Meets Performance</em></h2>
+    <p>Founded in 2021, AStudio Dance Academy was born from a simple belief — that every person, regardless of age or background, deserves access to world-class dance education. Our certified instructors bring professional stage experience into an inclusive, inspiring studio environment.</p>
+    <div class="about-feats">
+      <div class="about-feat"><strong>100+</strong><span>Students Trained</span></div>
+      <div class="about-feat"><strong>3+</strong><span>Years of Excellence</span></div>
+      <div class="about-feat"><strong>10</strong><span>Certified Instructors</span></div>
+      <div class="about-feat"><strong>30+</strong><span>Competition Medals</span></div>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-img-frame">
+      <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+        <defs>
+          <radialGradient id="abg" cx="50%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#2a2218"/>
+            <stop offset="100%" stop-color="#0d0b0a"/>
+          </radialGradient>
+        </defs>
+        <rect width="300" height="400" fill="url(#abg)"/>
+        <!-- Bollywood-style dancer -->
+        <g fill="none" stroke-width="1.8">
+          <circle cx="150" cy="65" r="22" stroke="rgba(245,232,210,0.25)"/>
+          <!-- Dupatta/scarf -->
+          <path d="M130,55 Q100,30 75,55 Q60,70 70,90" stroke="rgba(196,112,106,0.45)" stroke-width="2.5"/>
+          <path d="M170,55 Q200,35 225,60" stroke="rgba(196,112,106,0.35)" stroke-width="2"/>
+          <!-- Body -->
+          <path d="M140,87 Q145,120 143,160 Q142,185 145,210" stroke="rgba(245,232,210,0.25)" stroke-width="2.5"/>
+          <!-- Garment decoration -->
+          <path d="M110,130 Q145,125 178,130 Q170,155 145,152 Q120,155 110,130Z" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.3)"/>
+          <!-- Arms raised -->
+          <path d="M143,105 Q110,90 80,75" stroke="rgba(245,232,210,0.3)" stroke-width="2.5"/>
+          <path d="M147,105 Q178,95 210,88" stroke="rgba(245,232,210,0.3)" stroke-width="2.5"/>
+          <!-- Hands with mudra gesture -->
+          <path d="M80,75 Q75,70 78,65 Q83,62 86,67" stroke="rgba(245,232,210,0.25)"/>
+          <path d="M210,88 Q215,83 212,78 Q207,76 204,80" stroke="rgba(245,232,210,0.25)"/>
+          <!-- Legs -->
+          <path d="M143,210 Q135,255 120,295 Q110,330 100,365" stroke="rgba(245,232,210,0.2)" stroke-width="2.5"/>
+          <path d="M147,210 Q158,252 172,292 Q185,330 195,362" stroke="rgba(245,232,210,0.2)" stroke-width="2.5"/>
+          <!-- Ghungroo/ankle bells hint -->
+          <path d="M95,365 Q90,372 92,378" stroke="rgba(201,168,76,0.3)"/>
+          <path d="M195,362 Q200,369 198,375" stroke="rgba(201,168,76,0.3)"/>
+        </g>
+        <!-- Decorative dots (bindi pattern) -->
+        <circle cx="150" cy="58" r="2" fill="rgba(201,168,76,0.5)"/>
+        <circle cx="140" cy="61" r="1" fill="rgba(201,168,76,0.3)"/>
+        <circle cx="160" cy="61" r="1" fill="rgba(201,168,76,0.3)"/>
+      </svg>
+    </div>
+    <div class="about-quote">"Every step you take is a step closer to who you are meant to become."<br><strong style="font-size:0.75rem;font-style:normal;display:block;margin-top:0.6rem;">— Priya Sharma, Founder</strong></div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="programs-header">
+    <div>
+      <div class="section-eyebrow">What We Teach</div>
+      <h2>Programs for<br><em>Every Stage</em></h2>
+    </div>
+    <a href="#contact" class="btn-outline" style="white-space:nowrap">Explore All Classes</a>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card">
+      <div class="prog-icon">🌟</div>
+      <div class="prog-age">Ages 4–8</div>
+      <div class="prog-title">Little Movers</div>
+      <ul class="prog-items">
+        <li>Fun movement exploration</li>
+        <li>Rhythm & coordination</li>
+        <li>Creative expression</li>
+        <li>Confidence building</li>
+      </ul>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon">💫</div>
+      <div class="prog-age">Ages 9–14</div>
+      <div class="prog-title">Junior Program</div>
+      <ul class="prog-items">
+        <li>Technique & form</li>
+        <li>Stage performance</li>
+        <li>Competition prep</li>
+        <li>Partner work</li>
+      </ul>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon">🔥</div>
+      <div class="prog-age">Ages 15+</div>
+      <div class="prog-title">Teen & Adult</div>
+      <ul class="prog-items">
+        <li>Beginner to advanced</li>
+        <li>Fitness-focused options</li>
+        <li>Professional training</li>
+        <li>Audition coaching</li>
+      </ul>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon">✨</div>
+      <div class="prog-age">All Ages</div>
+      <div class="prog-title">Specialty Workshops</div>
+      <ul class="prog-items">
+        <li>Guest choreographers</li>
+        <li>Intensive weekends</li>
+        <li>Summer camps</li>
+        <li>Private coaching</li>
+      </ul>
+    </div>
+  </div>
+  <div class="specialty-grid">
+    <div class="specialty-chip">Ballet</div>
+    <div class="specialty-chip">Hip-Hop</div>
+    <div class="specialty-chip">Contemporary</div>
+    <div class="specialty-chip">Bollywood</div>
+    <div class="specialty-chip">Salsa</div>
+    <div class="specialty-chip">K-Pop</div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="section-eyebrow">Weekly Timetable</div>
+  <h2>Find Your<br><em>Perfect Class</em></h2>
+  <table class="schedule-table">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Morning</th>
+        <th>Evening</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="day-cell">Monday</td><td><span class="tag">Ballet</span></td><td><span class="tag">Hip-Hop</span></td><td>All Levels</td></tr>
+      <tr><td class="day-cell">Tuesday</td><td><span class="tag">Contemporary</span></td><td><span class="tag">Salsa</span></td><td>Beginner–Intermediate</td></tr>
+      <tr><td class="day-cell">Wednesday</td><td><span class="tag">Bollywood</span></td><td><span class="tag">Little Movers</span></td><td>All Levels</td></tr>
+      <tr><td class="day-cell">Thursday</td><td><span class="tag">Ballet</span></td><td><span class="tag">K-Pop</span></td><td>Intermediate–Advanced</td></tr>
+      <tr><td class="day-cell">Friday</td><td><span class="tag">Hip-Hop</span></td><td><span class="tag">Contemporary</span></td><td>All Levels</td></tr>
+      <tr><td class="day-cell">Weekend</td><td><span class="tag">Workshops</span></td><td><span class="tag">Practice Sessions</span></td><td>Open Studio</td></tr>
+    </tbody>
+  </table>
+  <div class="schedule-footer">
+    <a href="#" class="btn-primary" style="background:var(--gold);color:var(--ink)">Download Full Schedule</a>
+    <a href="#contact" class="btn-outline" style="border-color:rgba(201,168,76,0.4);color:var(--gold)">Reserve a Spot</a>
+  </div>
+</section>
+
+<!-- INSTRUCTORS -->
+<section id="instructors">
+  <div class="instructors-header">
+    <div>
+      <div class="section-eyebrow">The Team</div>
+      <h2>Meet Our<br><em>Instructors</em></h2>
+    </div>
+    <p style="color:var(--muted);line-height:1.7;font-weight:300;max-width:36ch;">Our faculty brings decades of professional stage experience, international certifications, and a genuine passion for nurturing the next generation of dancers.</p>
+  </div>
+  <div class="instructors-grid">
+    <div class="instructor-card">
+      <div class="instructor-photo">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <rect width="300" height="400" fill="#c0b59e"/>
+          <g fill="none" stroke="rgba(60,40,20,0.25)" stroke-width="1.5">
+            <circle cx="150" cy="80" r="35" stroke="rgba(60,40,20,0.2)"/>
+            <path d="M135,115 Q140,155 138,200" stroke-width="2.5"/>
+            <path d="M138,145 Q115,130 90,135"/>
+            <path d="M142,145 Q168,133 195,138"/>
+            <path d="M138,200 Q128,255 120,310 Q112,345 108,385"/>
+            <path d="M142,200 Q155,252 165,308 Q173,343 178,383"/>
+          </g>
+          <text x="150" y="398" text-anchor="middle" font-size="9" fill="rgba(60,40,20,0.35)" font-family="serif" letter-spacing="2">BALLET</text>
+        </svg>
+      </div>
+      <div class="instructor-info">
+        <div class="instructor-spec">Ballet</div>
+        <div class="instructor-name">Sarah Johnson</div>
+        <div class="instructor-bio">Royal Academy of Dance graduate. Former principal dancer with 12 years on stage. Specialises in classical and contemporary ballet.</div>
+        <div class="instructor-cert">
+          <span class="cert-tag">RAD Certified</span>
+          <span class="cert-tag">ISTD</span>
+          <span class="cert-tag">12 yrs exp.</span>
+        </div>
+      </div>
+    </div>
+    <div class="instructor-card">
+      <div class="instructor-photo">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <rect width="300" height="400" fill="#b5a898"/>
+          <g fill="none" stroke="rgba(30,20,10,0.25)" stroke-width="1.5">
+            <circle cx="150" cy="75" r="32" stroke="rgba(30,20,10,0.2)"/>
+            <path d="M150,107 L150,160"/>
+            <path d="M150,125 L105,105 L80,115"/>
+            <path d="M150,125 L195,108 L225,120"/>
+            <path d="M150,160 L125,220 L100,280 L85,360"/>
+            <path d="M150,160 L175,218 L200,277 L218,356"/>
+          </g>
+          <text x="150" y="398" text-anchor="middle" font-size="9" fill="rgba(30,20,10,0.3)" font-family="serif" letter-spacing="2">HIP-HOP</text>
+        </svg>
+      </div>
+      <div class="instructor-info">
+        <div class="instructor-spec">Hip-Hop & Street</div>
+        <div class="instructor-name">Michael Lee</div>
+        <div class="instructor-bio">Internationally touring choreographer. Featured in major music videos and brand campaigns. Makes every class electric.</div>
+        <div class="instructor-cert">
+          <span class="cert-tag">Certified Coach</span>
+          <span class="cert-tag">Battle Judge</span>
+          <span class="cert-tag">8 yrs exp.</span>
+        </div>
+      </div>
+    </div>
+    <div class="instructor-card">
+      <div class="instructor-photo">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <rect width="300" height="400" fill="#c8b9a8"/>
+          <g fill="none" stroke="rgba(60,30,20,0.22)" stroke-width="1.5">
+            <circle cx="150" cy="72" r="30" stroke="rgba(60,30,20,0.18)"/>
+            <path d="M150,102 Q148,135 145,168 Q143,190 145,215"/>
+            <path d="M120,55 Q95,38 72,52" stroke="rgba(180,80,60,0.35)" stroke-width="2"/>
+            <path d="M178,55 Q204,42 228,56" stroke="rgba(180,80,60,0.3)" stroke-width="1.5"/>
+            <path d="M143,120 Q112,108 88,118"/>
+            <path d="M147,120 Q178,112 205,122"/>
+            <path d="M145,215 Q133,262 122,308 Q112,348 106,385"/>
+            <path d="M147,215 Q160,260 172,306 Q182,346 190,383"/>
+          </g>
+          <text x="150" y="398" text-anchor="middle" font-size="9" fill="rgba(60,30,20,0.3)" font-family="serif" letter-spacing="2">BOLLYWOOD</text>
+        </svg>
+      </div>
+      <div class="instructor-info">
+        <div class="instructor-spec">Bollywood & Folk</div>
+        <div class="instructor-name">Priya Sharma</div>
+        <div class="instructor-bio">Trained in classical Kathak and Bharatanatyam with 15 years of Bollywood performance. Academy co-founder and lead choreographer.</div>
+        <div class="instructor-cert">
+          <span class="cert-tag">Kathak Expert</span>
+          <span class="cert-tag">Natyashala</span>
+          <span class="cert-tag">15 yrs exp.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-layout">
+    <div class="testimonials-left">
+      <div class="section-eyebrow">Stories</div>
+      <h2>What Our<br><em>Students Say</em></h2>
+      <p style="margin-top:1.2rem;">Real words from families and students who've transformed their lives through dance.</p>
+    </div>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">"</div>
+        <div class="testimonial-text">My daughter gained so much confidence and made incredible friends. The instructors are patient, inspiring, and genuinely care about each child.</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">👩</div>
+          <div>
+            <div class="author-name">Anika Menon</div>
+            <div class="author-role">Parent — Little Movers</div>
+          </div>
+          <div class="stars" style="margin-left:auto">★★★★★</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">"</div>
+        <div class="testimonial-text">The instructors helped me prepare for professional auditions with exactly the skills I needed. I landed my first contract six months after joining.</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">🧑</div>
+          <div>
+            <div class="author-name">Rohan Varghese</div>
+            <div class="author-role">Adult Student — Ballet</div>
+          </div>
+          <div class="stars" style="margin-left:auto">★★★★★</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">"</div>
+        <div class="testimonial-text">I started with zero experience at 35. Lumière made me feel welcome from day one. The Bollywood class has become the best part of my week.</div>
+        <div class="testimonial-author">
+          <div class="author-avatar">👩</div>
+          <div>
+            <div class="author-name">Deepa Krishnan</div>
+            <div class="author-role">Adult Student — Bollywood</div>
+          </div>
+          <div class="stars" style="margin-left:auto">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-eyebrow">Membership</div>
+  <h2>Plans for<br><em>Every Journey</em></h2>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Beginner</div>
+      <div class="plan-price"><sup>₹</sup>1,999</div>
+      <div class="plan-period">per month</div>
+      <ul class="plan-features">
+        <li>2 group classes per week</li>
+        <li>Access to one dance style</li>
+        <li>Student progress reports</li>
+        <li>Studio app access</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-light">Join Now</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="plan-name">Growth</div>
+      <div class="plan-price"><sup>₹</sup>3,499</div>
+      <div class="plan-period">per month · Most Popular</div>
+      <ul class="plan-features">
+        <li>Unlimited group classes</li>
+        <li>All dance styles included</li>
+        <li>Monthly workshop access</li>
+        <li>Video feedback sessions</li>
+        <li>Priority event registration</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-dark">Join Now</a>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Performance Team</div>
+      <div class="plan-price"><sup>₹</sup>5,999</div>
+      <div class="plan-period">per month</div>
+      <ul class="plan-features">
+        <li>Everything in Growth</li>
+        <li>Advanced & competition track</li>
+        <li>Solo coaching sessions</li>
+        <li>Costume & stage support</li>
+        <li>Competition registration</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-light">Join Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="section-eyebrow">Upcoming Events</div>
+  <h2>Showcase &<br><em>Celebrations</em></h2>
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-date">14</div>
+      <div class="event-month">July 2026</div>
+      <div class="event-title">Summer Showcase</div>
+      <div class="event-info">Our annual student showcase featuring performances from all age groups and dance styles. Families welcome.<br>📍 City Cultural Hall</div>
+      <a href="#contact" class="event-register">Register →</a>
+    </div>
+    <div class="event-card">
+      <div class="event-date">02</div>
+      <div class="event-month">August 2026</div>
+      <div class="event-title">Bollywood Intensive</div>
+      <div class="event-info">Weekend workshop with guest choreographer Anjali Rao. Master classical and filmi styles over two days.<br>📍 Lumière Studio A</div>
+      <a href="#contact" class="event-register">Register →</a>
+    </div>
+    <div class="event-card">
+      <div class="event-date">20</div>
+      <div class="event-month">September 2026</div>
+      <div class="event-title">Regional Competition</div>
+      <div class="event-info">Lumière Performance Team competes at the South India Dance Championship 2026. Join us to cheer them on!<br>📍 Kochi Convention Centre</div>
+      <a href="#contact" class="event-register">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-layout">
+    <div>
+      <div class="section-eyebrow">Common Questions</div>
+      <h2>Everything<br>You Need<br><em>to Know</em></h2>
+      <p style="color:var(--muted);margin-top:1.5rem;line-height:1.7;font-weight:300;max-width:28ch;">Can't find your answer here? We're always happy to chat — reach out via the contact form.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-question" onclick="toggleFaq(this)">Do I need prior dance experience?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Not at all! We welcome complete beginners across all age groups. Our Beginner plan is specifically designed for those new to dance, with patient instructors who love helping first-timers find their rhythm.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What should I wear to class?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Comfortable, fitted clothing that allows free movement is ideal. Specific footwear depends on your dance style — ballet requires ballet shoes, hip-hop uses clean trainers. We'll send you a detailed attire guide after enrollment.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Are free trial classes available?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Yes! Every new student gets one complimentary trial class to experience our teaching style, meet the instructor, and find the right fit before committing to a membership plan.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What age groups do you accept?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">We welcome students from age 4 through to adults. Little Movers starts at 4–8 years, Junior Program at 9–14, and Teen & Adult classes are open to ages 15 and up with no upper age limit.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can parents watch classes?<span class="faq-icon">+</span></button>
+        <div class="faq-answer">Parents of younger students (ages 4–8) are welcome to observe from our viewing area. For older age groups, we recommend allowing students their own space to build confidence, with open days scheduled every quarter.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Get In Touch</div>
+  <h2>Start Your<br><em>Dance Journey</em></h2>
+  <div class="contact-layout">
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-field"><label>First Name</label><input type="text" placeholder="Arjun"/></div>
+        <div class="form-field"><label>Last Name</label><input type="text" placeholder="Nair"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>Phone</label><input type="tel" placeholder="+91 98765 43210"/></div>
+        <div class="form-field"><label>Email</label><input type="email" placeholder="hello@example.com"/></div>
+      </div>
+      <div class="form-field">
+        <label>Program Interest</label>
+        <select>
+          <option value="">Select a program…</option>
+          <option>Little Movers (Ages 4–8)</option>
+          <option>Junior Program (Ages 9–14)</option>
+          <option>Teen & Adult Classes</option>
+          <option>Ballet</option>
+          <option>Hip-Hop</option>
+          <option>Bollywood</option>
+          <option>Contemporary</option>
+          <option>Salsa</option>
+          <option>K-Pop</option>
+          <option>Specialty Workshop</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Message (optional)</label><textarea rows="4" placeholder="Tell us a bit about yourself or any questions…"></textarea></div>
+      <button class="btn-submit" onclick="this.textContent='Sending…';setTimeout(()=>this.textContent='Message Sent!',1000)">Book Free Trial →</button>
+    </div>
+    <div class="contact-info">
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Studio Address</h4>
+          <p>42 Artiste Lane, Near Perumpavur Town Hall<br>Perumpavur, Kerala – 683 542</p>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <h4>Operating Hours</h4>
+          <p>Mon–Fri: 9:00 AM – 9:00 PM<br>Sat–Sun: 8:00 AM – 6:00 PM</p>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📞</div>
+        <div>
+          <h4>Phone & Email</h4>
+          <p>+91 98765 43210<br>hello@lumiere-dance.in</p>
+        </div>
+      </div>
+      <div class="map-frame">
+        <span>Google Maps Embed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Lumi<span>ère</span></a>
+      <p>Award-winning dance academy helping students of all ages discover the joy of movement since 2015.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#programs">Classes</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#instructors">Instructors</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#events">Events</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Dance Styles</h5>
+      <ul>
+        <li><a href="#programs">Ballet</a></li>
+        <li><a href="#programs">Hip-Hop</a></li>
+        <li><a href="#programs">Bollywood</a></li>
+        <li><a href="#programs">Contemporary</a></li>
+        <li><a href="#programs">Salsa</a></li>
+        <li><a href="#programs">K-Pop</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Newsletter</h5>
+      <p style="font-size:0.78rem;margin-bottom:1rem;">Get class updates, events, and special offers.</p>
+      <div class="newsletter-row">
+        <input type="email" placeholder="Your email"/>
+        <button>→</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Lumière Dance Academy. All rights reserved.</div>
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Facebook</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Smooth scroll offset for fixed nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Fade-in on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) en.target.style.opacity = 1;
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('section').forEach(s => {
+    s.style.opacity = 0;
+    s.style.transition = 'opacity 0.7s ease';
+    io.observe(s);
+  });
+  document.querySelector('#hero').style.opacity = 1;
+</script>
+</body>
+</html>
