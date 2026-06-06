@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bluebird Homestay – Experience Comfort in Nature's Embrace</title>
+<meta name="description" content="Bluebird Homestay – A luxury homestay in Kerala, India. Escape the city and discover peaceful living where comfort meets nature." />
+<meta name="keywords" content="homestay, Kerala, luxury, nature, accommodation, boutique, retreat" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+<style>
+  /* ===================== CSS VARIABLES ===================== */
+  :root {
+    --navy: #0F172A;
+    --navy-mid: #1E293B;
+    --sky: #38BDF8;
+    --sky-light: #7DD3FC;
+    --sky-dim: rgba(56,189,248,0.15);
+    --beige: #F8F5F0;
+    --beige-dark: #EDE8E0;
+    --white: #FFFFFF;
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --text-dark: #0F172A;
+    --text-mid: #475569;
+    --text-light: #94A3B8;
+    --glass: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.12);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --shadow-soft: 0 4px 32px rgba(15,23,42,0.10);
+    --shadow-card: 0 8px 48px rgba(15,23,42,0.14);
+    --shadow-hover: 0 20px 64px rgba(15,23,42,0.22);
+    --radius: 16px;
+    --radius-sm: 8px;
+    --transition: 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ===================== RESET & BASE ===================== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: var(--font-body);
+    background: var(--beige);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  img { max-width: 100%; display: block; }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  button { cursor: pointer; font-family: var(--font-body); border: none; outline: none; }
+  input, textarea, select { font-family: var(--font-body); outline: none; }
+
+  /* ===================== UTILITIES ===================== */
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+  }
+  .section-tag::before, .section-tag::after {
+    content: ''; width: 28px; height: 1px; background: var(--gold); opacity: 0.6;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 500; line-height: 1.18; color: var(--navy);
+  }
+  .section-title.light { color: var(--white); }
+  .section-subtitle {
+    font-size: 1rem; color: var(--text-mid); max-width: 560px; line-height: 1.7; margin-top: 12px;
+  }
+  .section-subtitle.light { color: rgba(255,255,255,0.7); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 50px; font-size: 0.875rem;
+    font-weight: 500; letter-spacing: 0.04em; transition: var(--transition);
+    position: relative; overflow: hidden;
+  }
+  .btn-primary {
+    background: var(--sky); color: var(--navy);
+  }
+  .btn-primary:hover { background: var(--sky-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(56,189,248,0.35); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.45);
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); border-color: var(--white); }
+  .btn-gold {
+    background: var(--gold); color: var(--white);
+  }
+  .btn-gold:hover { background: #b8935a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,169,110,0.4); }
+  .btn-dark {
+    background: var(--navy); color: var(--white);
+  }
+  .btn-dark:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+  /* ===================== REVEAL ANIMATIONS ===================== */
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible { opacity: 1; transform: none; }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-right.visible { opacity: 1; transform: none; }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+  .delay-5 { transition-delay: 0.5s; }
+
+  /* ===================== NAVBAR ===================== */
+  #navbar {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 22px 0;
+    transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+  }
+  #navbar.scrolled {
+    background: rgba(15,23,42,0.96);
+    backdrop-filter: blur(18px);
+    padding: 14px 0;
+    box-shadow: 0 2px 32px rgba(0,0,0,0.18);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--sky), var(--sky-light));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .nav-logo-text {
+    font-family: var(--font-display); font-size: 1.35rem; font-weight: 600;
+    color: var(--white); letter-spacing: 0.01em;
+  }
+  .nav-logo-text span { color: var(--sky); }
+  .nav-menu {
+    display: flex; align-items: center; gap: 32px;
+  }
+  .nav-menu a {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: rgba(255,255,255,0.8);
+    transition: color 0.3s ease; position: relative;
+  }
+  .nav-menu a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1.5px; background: var(--sky);
+    transition: width 0.3s ease;
+  }
+  .nav-menu a:hover { color: var(--white); }
+  .nav-menu a:hover::after { width: 100%; }
+  .nav-cta { margin-left: 8px; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; padding: 4px; cursor: pointer;
+  }
+  .hamburger span {
+    width: 24px; height: 2px; background: var(--white);
+    display: block; transition: var(--transition); border-radius: 2px;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .mobile-menu {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: var(--navy); z-index: 999; flex-direction: column;
+    align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 400;
+    color: var(--white); letter-spacing: 0.02em; transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--sky); }
+  .mobile-close {
+    position: absolute; top: 24px; right: 24px;
+    background: none; color: var(--white); font-size: 2rem; line-height: 1;
+  }
+
+  /* ===================== HERO ===================== */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?w=1800&q=80');
+    background-size: cover; background-position: center;
+    transform-origin: center; animation: heroZoom 18s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(
+      165deg,
+      rgba(15,23,42,0.72) 0%,
+      rgba(15,23,42,0.45) 50%,
+      rgba(15,23,42,0.65) 100%
+    );
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center;
+    padding: 0 24px; max-width: 900px;
+    animation: heroFadeIn 1.2s ease 0.3s both;
+  }
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: none; }
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    color: var(--sky-light); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 8px 20px; border-radius: 50px; margin-bottom: 28px;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--sky);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6vw, 5.2rem);
+    font-weight: 400; color: var(--white); line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .hero-title em { font-style: italic; color: var(--sky-light); }
+  .hero-subtitle {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    color: rgba(255,255,255,0.75); max-width: 580px; margin: 0 auto 40px;
+    line-height: 1.75;
+  }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero-stats {
+    position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; gap: 48px;
+    background: var(--glass); backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border); border-radius: var(--radius);
+    padding: 20px 40px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num {
+    font-family: var(--font-display); font-size: 1.8rem; font-weight: 500;
+    color: var(--white); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.55); margin-top: 4px;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.5); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    animation: scrollBounce 2s ease infinite;
+  }
+  @keyframes scrollBounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+  .scroll-line {
+    width: 1.5px; height: 36px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  }
+
+  /* ===================== FLOATING DECORATIVES ===================== */
+  .floater {
+    position: absolute; border-radius: 50%; pointer-events: none; z-index: 1;
+    animation: float 7s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+
+  /* ===================== ABOUT ===================== */
+  #about { padding: 120px 0; background: var(--beige); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-img-wrap {
+    position: relative; border-radius: 24px; overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .about-img-wrap img {
+    width: 100%; height: 560px; object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  .about-img-wrap:hover img { transform: scale(1.04); }
+  .about-img-badge {
+    position: absolute; bottom: 24px; left: 24px;
+    background: var(--navy); color: var(--white);
+    padding: 14px 22px; border-radius: var(--radius-sm);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .about-img-badge-num {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--sky);
+  }
+  .about-img-badge-text { font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+  .about-features { margin: 28px 0; display: flex; flex-direction: column; gap: 14px; }
+  .about-feature {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; border-radius: var(--radius-sm);
+    background: var(--white); box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+  }
+  .about-feature:hover { transform: translateX(6px); box-shadow: var(--shadow-card); }
+  .about-feature-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--sky-dim); color: var(--sky);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .about-feature-text { font-size: 0.9rem; color: var(--text-mid); font-weight: 500; }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 36px; }
+  .stat-card {
+    text-align: center; padding: 22px 10px;
+    background: var(--navy); border-radius: var(--radius-sm);
+    color: var(--white);
+  }
+  .stat-card-num {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--sky);
+  }
+  .stat-card-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+  /* ===================== ROOMS ===================== */
+  #rooms { padding: 120px 0; background: var(--white); }
+  .rooms-header { text-align: center; margin-bottom: 64px; }
+  .rooms-header .section-subtitle { margin: 12px auto 0; }
+  .rooms-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .room-card {
+    border-radius: 24px; overflow: hidden; background: var(--beige);
+    box-shadow: var(--shadow-card); transition: var(--transition);
+    position: relative;
+  }
+  .room-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+  .room-img {
+    position: relative; overflow: hidden; height: 280px;
+  }
+  .room-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  .room-card:hover .room-img img { transform: scale(1.08); }
+  .room-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--navy); color: var(--sky); font-size: 0.7rem;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 50px;
+  }
+  .room-body { padding: 28px; }
+  .room-title {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 500;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .room-desc { font-size: 0.875rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 18px; }
+  .room-meta { display: flex; gap: 20px; margin-bottom: 22px; }
+  .room-meta-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; color: var(--text-mid);
+  }
+  .room-meta-icon { color: var(--sky); font-size: 0.95rem; }
+  .room-footer { display: flex; align-items: center; justify-content: space-between; }
+  .room-price { font-family: var(--font-display); }
+  .room-price span { font-size: 1.9rem; font-weight: 600; color: var(--navy); }
+  .room-price small { font-size: 0.8rem; color: var(--text-light); font-family: var(--font-body); }
+
+  /* ===================== AMENITIES ===================== */
+  #amenities { padding: 120px 0; background: var(--navy); }
+  .amenities-header { text-align: center; margin-bottom: 64px; }
+  .amenities-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  .amenity-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: var(--radius); padding: 32px 20px; text-align: center;
+    transition: var(--transition); backdrop-filter: blur(8px);
+    cursor: default;
+  }
+  .amenity-card:hover {
+    background: rgba(56,189,248,0.12);
+    border-color: rgba(56,189,248,0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(56,189,248,0.15);
+  }
+  .amenity-icon {
+    font-size: 2rem; margin-bottom: 14px;
+    display: flex; justify-content: center;
+  }
+  .amenity-name {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; color: rgba(255,255,255,0.75);
+  }
+
+  /* ===================== EXPERIENCES ===================== */
+  #experiences { padding: 120px 0; background: var(--beige); }
+  .experiences-header { margin-bottom: 64px; }
+  .exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .exp-card {
+    border-radius: var(--radius); overflow: hidden;
+    position: relative; height: 280px; cursor: pointer;
+    box-shadow: var(--shadow-card); transition: var(--transition);
+  }
+  .exp-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+  .exp-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  .exp-card:hover img { transform: scale(1.1); }
+  .exp-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.1) 60%);
+    transition: var(--transition);
+  }
+  .exp-card:hover .exp-overlay { background: linear-gradient(to top, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.25) 60%); }
+  .exp-content {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 22px;
+  }
+  .exp-icon { font-size: 1.5rem; margin-bottom: 6px; }
+  .exp-title {
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 500;
+    color: var(--white); line-height: 1.2;
+  }
+  .exp-tag {
+    display: inline-block; margin-top: 8px;
+    background: var(--sky-dim); border: 1px solid rgba(56,189,248,0.3);
+    color: var(--sky-light); font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 50px;
+    opacity: 0; transform: translateY(8px); transition: var(--transition);
+  }
+  .exp-card:hover .exp-tag { opacity: 1; transform: none; }
+
+  /* ===================== GALLERY ===================== */
+  #gallery { padding: 120px 0; background: var(--white); }
+  .gallery-header { text-align: center; margin-bottom: 56px; }
+  .masonry-grid {
+    columns: 3; column-gap: 16px;
+  }
+  .masonry-item {
+    break-inside: avoid; margin-bottom: 16px;
+    border-radius: var(--radius-sm); overflow: hidden;
+    cursor: pointer; position: relative; display: block;
+  }
+  .masonry-item img {
+    width: 100%; display: block;
+    transition: transform 0.7s ease;
+  }
+  .masonry-item:hover img { transform: scale(1.06); }
+  .masonry-overlay {
+    position: absolute; inset: 0;
+    background: rgba(15,23,42,0); transition: background 0.4s ease;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .masonry-item:hover .masonry-overlay {
+    background: rgba(15,23,42,0.35);
+  }
+  .masonry-zoom {
+    color: var(--white); font-size: 1.5rem;
+    opacity: 0; transform: scale(0.7); transition: var(--transition);
+  }
+  .masonry-item:hover .masonry-zoom { opacity: 1; transform: scale(1); }
+  /* Lightbox */
+  #lightbox {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.93); align-items: center; justify-content: center;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 90vw; max-height: 88vh; border-radius: var(--radius);
+    box-shadow: 0 0 80px rgba(0,0,0,0.7);
+  }
+  #lightbox-close {
+    position: fixed; top: 20px; right: 28px;
+    color: white; font-size: 2.5rem; cursor: pointer; z-index: 2001;
+    background: none; line-height: 1; opacity: 0.7; transition: opacity 0.2s;
+  }
+  #lightbox-close:hover { opacity: 1; }
+
+  /* ===================== TESTIMONIALS ===================== */
+  #testimonials { padding: 120px 0; background: var(--navy); }
+  .testimonials-header { text-align: center; margin-bottom: 64px; }
+  .testimonials-wrap { position: relative; overflow: hidden; }
+  .testimonials-track {
+    display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+  .testimonial-slide {
+    min-width: 100%; padding: 0 40px;
+  }
+  .testimonial-inner {
+    max-width: 800px; margin: 0 auto; text-align: center;
+  }
+  .testimonial-stars {
+    color: var(--gold); font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 28px;
+  }
+  .testimonial-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.65;
+    margin-bottom: 36px;
+  }
+  .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 16px; }
+  .testimonial-avatar {
+    width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+    border: 2.5px solid var(--sky);
+  }
+  .testimonial-name {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--white);
+  }
+  .testimonial-location { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .testimonial-dots {
+    display: flex; justify-content: center; gap: 10px; margin-top: 40px;
+  }
+  .t-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25);
+    transition: background 0.3s, transform 0.3s; cursor: pointer;
+  }
+  .t-dot.active { background: var(--sky); transform: scale(1.3); }
+
+  /* ===================== OFFERS ===================== */
+  #offers { padding: 120px 0; background: var(--beige); }
+  .offers-header { text-align: center; margin-bottom: 64px; }
+  .offers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .offer-card {
+    border-radius: 24px; overflow: hidden; position: relative;
+    background: var(--navy); color: var(--white);
+    box-shadow: var(--shadow-card); transition: var(--transition);
+  }
+  .offer-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+  .offer-img { position: relative; height: 220px; overflow: hidden; }
+  .offer-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s; }
+  .offer-card:hover .offer-img img { transform: scale(1.06); }
+  .offer-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(15,23,42,0.6));
+  }
+  .offer-tag {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--gold); color: var(--white); font-size: 0.7rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 50px;
+  }
+  .offer-body { padding: 28px; }
+  .offer-title {
+    font-family: var(--font-display); font-size: 1.6rem; font-weight: 500;
+    color: var(--white); margin-bottom: 16px;
+  }
+  .offer-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .offer-list-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.875rem; color: rgba(255,255,255,0.75);
+  }
+  .offer-list-icon { color: var(--sky); font-size: 0.95rem; }
+  .offer-footer { display: flex; align-items: center; justify-content: space-between; }
+  .offer-price { font-family: var(--font-display); }
+  .offer-price span { font-size: 1.7rem; font-weight: 600; color: var(--sky); }
+  .offer-price small { font-size: 0.8rem; color: rgba(255,255,255,0.5); display: block; }
+
+  /* ===================== FAQ ===================== */
+  #faq { padding: 120px 0; background: var(--white); }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .faq-aside { position: sticky; top: 100px; }
+  .faq-aside-img {
+    border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-card);
+    height: 460px;
+  }
+  .faq-aside-img img { width: 100%; height: 100%; object-fit: cover; }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    border: 1.5px solid var(--beige-dark); border-radius: var(--radius-sm);
+    overflow: hidden; background: var(--beige); transition: border-color 0.3s;
+  }
+  .faq-item.open { border-color: var(--sky); }
+  .faq-question {
+    width: 100%; text-align: left; padding: 20px 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: none; font-size: 0.95rem; font-weight: 500; color: var(--navy);
+    gap: 16px;
+  }
+  .faq-icon {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    background: var(--beige-dark); display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: var(--navy); transition: var(--transition); font-style: normal;
+  }
+  .faq-item.open .faq-icon { background: var(--sky); color: var(--white); transform: rotate(45deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 22px; font-size: 0.875rem; color: var(--text-mid); line-height: 1.7;
+  }
+  .faq-item.open .faq-answer { max-height: 200px; padding: 0 22px 20px; }
+
+  /* ===================== CONTACT ===================== */
+  #contact { padding: 120px 0; background: var(--beige); }
+  .contact-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: start; }
+  .contact-form-wrap {
+    background: var(--white); padding: 48px; border-radius: 24px;
+    box-shadow: var(--shadow-card);
+  }
+  .form-title {
+    font-family: var(--font-display); font-size: 1.9rem; font-weight: 500;
+    color: var(--navy); margin-bottom: 32px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 18px; }
+  .form-label {
+    display: block; font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-mid); margin-bottom: 7px;
+  }
+  .form-input {
+    width: 100%; padding: 13px 16px; border-radius: var(--radius-sm);
+    border: 1.5px solid var(--beige-dark); background: var(--beige);
+    font-size: 0.9rem; color: var(--navy); transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .form-input:focus { border-color: var(--sky); box-shadow: 0 0 0 3px rgba(56,189,248,0.1); background: var(--white); }
+  textarea.form-input { resize: vertical; min-height: 100px; }
+  .contact-info-wrap { padding-top: 12px; }
+  .contact-title {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 500;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .contact-tagline { font-size: 0.9rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 36px; }
+  .contact-items { display: flex; flex-direction: column; gap: 20px; margin-bottom: 36px; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 18px; border-radius: var(--radius-sm);
+    background: var(--white); box-shadow: var(--shadow-soft);
+  }
+  .contact-item-icon {
+    width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+    background: var(--sky-dim); color: var(--sky);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+  .contact-item-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); }
+  .contact-item-val { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-top: 2px; }
+  .map-wrap {
+    border-radius: var(--radius); overflow: hidden; height: 220px;
+    box-shadow: var(--shadow-card);
+  }
+  .map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+  /* ===================== FOOTER ===================== */
+  footer {
+    background: var(--navy); padding: 80px 0 32px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 56px; }
+  .footer-brand .nav-logo-text { font-size: 1.4rem; }
+  .footer-tagline { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-top: 14px; margin-bottom: 24px; }
+  .social-row { display: flex; gap: 12px; }
+  .social-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.65); font-size: 1rem; transition: var(--transition);
+    text-decoration: none;
+  }
+  .social-btn:hover { background: var(--sky); border-color: var(--sky); color: var(--navy); }
+  .footer-col-title {
+    font-family: var(--font-body); font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    font-size: 0.875rem; color: rgba(255,255,255,0.6); transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--sky); }
+  .footer-newsletter input {
+    width: 100%; padding: 12px 16px; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    border: 1.5px solid var(--glass-border); border-bottom: none;
+    background: var(--glass); color: var(--white); font-size: 0.875rem;
+  }
+  .footer-newsletter input::placeholder { color: rgba(255,255,255,0.35); }
+  .footer-newsletter button {
+    width: 100%; padding: 12px; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    background: var(--sky); color: var(--navy); font-weight: 600;
+    font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+    transition: var(--transition);
+  }
+  .footer-newsletter button:hover { background: var(--sky-light); }
+  .footer-bottom {
+    border-top: 1px solid var(--glass-border); padding-top: 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a { font-size: 0.78rem; color: rgba(255,255,255,0.35); transition: color 0.3s; }
+  .footer-bottom-links a:hover { color: var(--sky); }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width: 1100px) {
+    .amenities-grid { grid-template-columns: repeat(4, 1fr); }
+    .exp-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .masonry-grid { columns: 2; }
+  }
+  @media (max-width: 900px) {
+    .nav-menu, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-img-wrap img { height: 380px; }
+    .rooms-grid { grid-template-columns: 1fr; }
+    .amenities-grid { grid-template-columns: repeat(3, 1fr); }
+    .faq-grid { grid-template-columns: 1fr; }
+    .faq-aside { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .offers-grid { grid-template-columns: 1fr; }
+    .hero-stats { display: none; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 16px; }
+    #about, #rooms, #amenities, #experiences, #gallery, #testimonials, #offers, #faq, #contact { padding: 80px 0; }
+    .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+    .exp-grid { grid-template-columns: 1fr 1fr; }
+    .masonry-grid { columns: 1; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form-wrap { padding: 28px 20px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  @media (max-width: 420px) {
+    .exp-grid { grid-template-columns: 1fr; }
+    .rooms-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== NAVBAR ====== -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-icon">🐦</div>
+      <div class="nav-logo-text"><span>Bluebird</span> Homestay</div>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#rooms">Rooms</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#experiences">Experiences</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary nav-cta" style="padding:11px 24px;font-size:.8rem;">Book Now</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#home" class="mob-link">Home</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#rooms" class="mob-link">Rooms</a>
+  <a href="#amenities" class="mob-link">Amenities</a>
+  <a href="#experiences" class="mob-link">Experiences</a>
+  <a href="#gallery" class="mob-link">Gallery</a>
+  <a href="#testimonials" class="mob-link">Testimonials</a>
+  <a href="#contact" class="mob-link">Contact</a>
+</div>
+
+<!-- ====== HERO ====== -->
+<section id="home">
+  <div id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Now Accepting Bookings for 2026
+      </div>
+      <h1 class="hero-title">
+        Experience Comfort in<br><em>Nature's Embrace</em>
+      </h1>
+      <p class="hero-subtitle">
+        Escape the city and discover peaceful living at Bluebird Homestay, where comfort meets nature amidst Kerala's breathtaking landscapes.
+      </p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">🗓 Book Your Stay</a>
+        <a href="#rooms" class="btn btn-outline">Explore Rooms →</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">1000+</div>
+        <div class="hero-stat-label">Happy Guests</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4.9★</div>
+        <div class="hero-stat-label">Rating</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">8</div>
+        <div class="hero-stat-label">Luxury Rooms</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5 Yrs</div>
+        <div class="hero-stat-label">Of Excellence</div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      scroll
+    </div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-left">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Bluebird Homestay exterior" loading="lazy" />
+        <div class="about-img-badge">
+          <div class="about-img-badge-num">5★</div>
+          <div class="about-img-badge-text">Guest Rating, 2026</div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="section-tag">Our Story</div>
+        <h2 class="section-title">A Sanctuary Far from<br>the Ordinary</h2>
+        <p class="section-subtitle">
+          Nestled in the heart of Kerala's lush greenery, Bluebird Homestay offers an unmatched retreat experience — where warm hospitality, natural beauty, and cultural richness come together in perfect harmony.
+        </p>
+        <div class="about-features">
+          <div class="about-feature reveal delay-1">
+            <div class="about-feature-icon">🌿</div>
+            <div class="about-feature-text">Peaceful location surrounded by tropical forests and tranquil backwaters</div>
+          </div>
+          <div class="about-feature reveal delay-2">
+            <div class="about-feature-icon">👨‍👩‍👧‍👦</div>
+            <div class="about-feature-text">Warm family-friendly atmosphere tailored to every kind of traveller</div>
+          </div>
+          <div class="about-feature reveal delay-3">
+            <div class="about-feature-icon">🏔</div>
+            <div class="about-feature-text">Spectacular scenic surroundings — hills, paddy fields & misty mornings</div>
+          </div>
+          <div class="about-feature reveal delay-4">
+            <div class="about-feature-icon">🤝</div>
+            <div class="about-feature-text">Personalized hospitality — every guest is treated like family</div>
+          </div>
+          <div class="about-feature reveal delay-5">
+            <div class="about-feature-icon">🎨</div>
+            <div class="about-feature-text">Immersive local cultural experiences, cuisine, and traditions</div>
+          </div>
+        </div>
+        <div class="stats-row reveal">
+          <div class="stat-card">
+            <div class="stat-card-num" data-target="1000">0</div>
+            <div class="stat-card-label">Happy Guests</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-num" data-target="49" data-decimal>0</div>
+            <div class="stat-card-label">Star Rating</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-num" data-target="8">0</div>
+            <div class="stat-card-label">Luxury Rooms</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-num" data-target="5">0</div>
+            <div class="stat-card-label">Years of Excellence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ROOMS ====== -->
+<section id="rooms">
+  <div class="container">
+    <div class="rooms-header reveal">
+      <div class="section-tag">Accommodations</div>
+      <h2 class="section-title">Rooms Designed for<br>Pure Indulgence</h2>
+      <p class="section-subtitle">Each of our rooms is a hand-crafted haven blending natural materials, local artistry, and modern luxury.</p>
+    </div>
+    <div class="rooms-grid">
+
+      <div class="room-card reveal delay-1">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&q=80" alt="Deluxe Garden Room" loading="lazy" />
+          <div class="room-badge">Most Popular</div>
+        </div>
+        <div class="room-body">
+          <div class="room-title">Deluxe Garden Room</div>
+          <p class="room-desc">Wake up to morning birdsong and the gentle fragrance of tropical flowers. Floor-to-ceiling windows frame your private garden view perfectly.</p>
+          <div class="room-meta">
+            <span class="room-meta-item"><span class="room-meta-icon">👤</span> 2 Guests</span>
+            <span class="room-meta-item"><span class="room-meta-icon">📐</span> 320 sq.ft</span>
+            <span class="room-meta-item"><span class="room-meta-icon">🛏</span> King Bed</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price"><span>₹4,500</span><small>/ night</small></div>
+            <a href="#contact" class="btn btn-dark" style="padding:10px 22px;font-size:.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card reveal delay-2">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=700&q=80" alt="Family Suite" loading="lazy" />
+          <div class="room-badge">Family Pick</div>
+        </div>
+        <div class="room-body">
+          <div class="room-title">Family Suite</div>
+          <p class="room-desc">Spacious and thoughtfully designed for families, with separate sleeping zones, a cozy lounge, and vibrant décor that children adore.</p>
+          <div class="room-meta">
+            <span class="room-meta-item"><span class="room-meta-icon">👤</span> 4 Guests</span>
+            <span class="room-meta-item"><span class="room-meta-icon">📐</span> 580 sq.ft</span>
+            <span class="room-meta-item"><span class="room-meta-icon">🛏</span> 2 Queen Beds</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price"><span>₹7,200</span><small>/ night</small></div>
+            <a href="#contact" class="btn btn-dark" style="padding:10px 22px;font-size:.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card reveal delay-3">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=700&q=80" alt="Mountain View Room" loading="lazy" />
+          <div class="room-badge">Scenic View</div>
+        </div>
+        <div class="room-body">
+          <div class="room-title">Premium Mountain View Room</div>
+          <p class="room-desc">Uninterrupted panoramic views of mist-cloaked hills from your private balcony. Fall asleep to crickets; wake to golden sunrise over the peaks.</p>
+          <div class="room-meta">
+            <span class="room-meta-item"><span class="room-meta-icon">👤</span> 2 Guests</span>
+            <span class="room-meta-item"><span class="room-meta-icon">📐</span> 420 sq.ft</span>
+            <span class="room-meta-item"><span class="room-meta-icon">🛏</span> King Bed</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price"><span>₹6,000</span><small>/ night</small></div>
+            <a href="#contact" class="btn btn-dark" style="padding:10px 22px;font-size:.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="room-card reveal delay-4">
+        <div class="room-img">
+          <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=700&q=80" alt="Honeymoon Cottage" loading="lazy" />
+          <div class="room-badge">✨ Romantic</div>
+        </div>
+        <div class="room-body">
+          <div class="room-title">Honeymoon Cottage</div>
+          <p class="room-desc">A secluded love nest with a rain shower, clawfoot tub, candlelit terrace, and a private plunge pool — crafted entirely for romance.</p>
+          <div class="room-meta">
+            <span class="room-meta-item"><span class="room-meta-icon">👤</span> 2 Guests</span>
+            <span class="room-meta-item"><span class="room-meta-icon">📐</span> 650 sq.ft</span>
+            <span class="room-meta-item"><span class="room-meta-icon">🛁</span> Clawfoot Tub</span>
+          </div>
+          <div class="room-footer">
+            <div class="room-price"><span>₹9,500</span><small>/ night</small></div>
+            <a href="#contact" class="btn btn-dark" style="padding:10px 22px;font-size:.82rem;">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== AMENITIES ====== -->
+<section id="amenities">
+  <div class="container">
+    <div class="amenities-header reveal">
+      <div class="section-tag" style="justify-content:center;">What We Offer</div>
+      <h2 class="section-title light" style="text-align:center;">Every Comfort,<br>Thoughtfully Curated</h2>
+      <p class="section-subtitle light" style="margin:12px auto 0;text-align:center;">From the essentials to unexpected luxuries — we have ensured your stay is flawlessly comfortable.</p>
+    </div>
+    <div class="amenities-grid">
+      <div class="amenity-card reveal delay-1"><div class="amenity-icon">📶</div><div class="amenity-name">Free WiFi</div></div>
+      <div class="amenity-card reveal delay-1"><div class="amenity-icon">❄️</div><div class="amenity-name">Air Conditioning</div></div>
+      <div class="amenity-card reveal delay-2"><div class="amenity-icon">🍳</div><div class="amenity-name">Complimentary Breakfast</div></div>
+      <div class="amenity-card reveal delay-2"><div class="amenity-icon">🚗</div><div class="amenity-name">Free Parking</div></div>
+      <div class="amenity-card reveal delay-3"><div class="amenity-icon">🔥</div><div class="amenity-name">Campfire Area</div></div>
+      <div class="amenity-card reveal delay-3"><div class="amenity-icon">🏊</div><div class="amenity-name">Swimming Pool</div></div>
+      <div class="amenity-card reveal delay-4"><div class="amenity-icon">🛎</div><div class="amenity-name">Room Service</div></div>
+      <div class="amenity-card reveal delay-4"><div class="amenity-icon">📺</div><div class="amenity-name">Smart TV</div></div>
+      <div class="amenity-card reveal delay-5"><div class="amenity-icon">⚡</div><div class="amenity-name">Power Backup</div></div>
+      <div class="amenity-card reveal delay-5"><div class="amenity-icon">🗺</div><div class="amenity-name">Travel Assistance</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EXPERIENCES ====== -->
+<section id="experiences">
+  <div class="container">
+    <div class="experiences-header reveal">
+      <div class="section-tag">Curated Experiences</div>
+      <h2 class="section-title">Stories You'll Carry Home</h2>
+      <p class="section-subtitle">Every moment at Bluebird is designed to be remembered — from misty morning treks to starlit campfire stories.</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal delay-1">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" alt="Nature Walks" loading="lazy" />
+        <div class="exp-overlay"></div>
+        <div class="exp-content">
+          <div class="exp-icon">🌿</div>
+          <div class="exp-title">Nature Walks</div>
+          <div class="exp-tag">Daily • Free</div>
+        </div>
+      </div>
+      <div class="exp-card reveal delay-2">
+        <img src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=600&q=80" alt="Campfire Nights" loading="lazy" />
+        <div class="exp-overlay"></div>
+        <div class="exp-content">
+          <div class="exp-icon">🔥</div>
+          <div class="exp-title">Campfire Nights</div>
+          <div class="exp-tag">Evenings • Included</div>
+        </div>
+      </div>
+      <div class="exp-card reveal delay-3">
+        <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&q=80" alt="Bird Watching" loading="lazy" />
+        <div class="exp-overlay"></div>
+        <div class="exp-content">
+          <div class="exp-icon">🦜</div>
+          <div class="exp-title">Bird Watching</div>
+          <div class="exp-tag">Sunrise • Guide Included</div>
+        </div>
+      </div>
+      <div class="exp-card reveal delay-4">
+        <img src="https://images.unsplash.com/photo-1501554728187-ce583db33af7?w=600&q=80" alt="Trekking Adventures" loading="lazy" />
+        <div class="exp-overlay"></div>
+        <div class="exp-content">
+          <div class="exp-icon">🥾</div>
+          <div class="exp-title">Trekking Adventures</div>
+          <div class="exp-tag">Half-day • Expert Guide</div>
+        </div>
+      </div>
+      <div class="exp-card reveal delay-1">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Local Sightseeing" loading="lazy" />
+        <div class="exp-overlay"></div>
+        <div class="exp-content">
+          <div class="exp-icon">🏛</div>
+          <div class="exp-title">Local Sightseeing</div>
+          <div class="exp-tag">Private Tours</div>
+        </div>
+      </div>
+      <div class="exp-card reveal delay-2">
+        <img src="https://images.unsplash.com/photo-1471506480208-91b3a4cc78be?w=600&q=80" alt="Village Tours" loading="lazy" />
+        <div class="exp-overlay"></div>
+        <div class="exp-content">
+          <div class="exp-icon">🏘</div>
+          <div class="exp-title">Village Tours</div>
+          <div class="exp-tag">Cultural Immersion</div>
+        </div>
+      </div>
+      <div class="exp-card reveal delay-3">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Cycling" loading="lazy" />
+        <div class="exp-overlay"></div>
+        <div class="exp-content">
+          <div class="exp-icon">🚴</div>
+          <div class="exp-title">Cycling</div>
+          <div class="exp-tag">Bikes Provided</div>
+        </div>
+      </div>
+      <div class="exp-card reveal delay-4">
+        <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80" alt="Photography Tours" loading="lazy" />
+        <div class="exp-overlay"></div>
+        <div class="exp-content">
+          <div class="exp-icon">📸</div>
+          <div class="exp-title">Photography Tours</div>
+          <div class="exp-tag">Golden Hour Shoots</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== GALLERY ====== -->
+<section id="gallery">
+  <div class="container">
+    <div class="gallery-header reveal">
+      <div class="section-tag">Visual Journey</div>
+      <h2 class="section-title">A Glimpse into<br>Our World</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Let the images speak — each frame captures the spirit of Bluebird Homestay.</p>
+    </div>
+    <div class="masonry-grid">
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?w=600&q=80" alt="Homestay exterior" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Luxury room" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1585534247886-f7c30a78afbf?w=600&q=80" alt="Swimming pool" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600&q=80" alt="Garden area" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Dining space" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=600&q=80" alt="Campfire area" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Scenic views" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=600&q=80" alt="Guest experiences" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" alt="Nature surroundings" loading="lazy" />
+        <div class="masonry-overlay"><span class="masonry-zoom">🔍</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Gallery image" />
+</div>
+
+<!-- ====== TESTIMONIALS ====== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testimonials-header reveal">
+      <div class="section-tag" style="justify-content:center;">Guest Stories</div>
+      <h2 class="section-title light" style="text-align:center;">Words from Our<br>Happy Guests</h2>
+    </div>
+    <div class="testimonials-wrap reveal">
+      <div class="testimonials-track" id="testimonialsTrack">
+
+        <div class="testimonial-slide">
+          <div class="testimonial-inner">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">"An absolute dream of a stay. The misty mornings, the forest sounds, the warmth of the hosts — I've stayed in five-star hotels that didn't come close to this feeling. Bluebird isn't just accommodation; it's an experience that stays with you."</p>
+            <div class="testimonial-author">
+              <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Priya Menon" loading="lazy" />
+              <div>
+                <div class="testimonial-name">Priya Menon</div>
+                <div class="testimonial-location">📍 Bengaluru, India</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-slide">
+          <div class="testimonial-inner">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">"Our honeymoon here was beyond perfect. The cottage is private, romantic, and absurdly beautiful. We woke up every morning to stunning views and slept to the sounds of the forest. We're already planning our anniversary trip back."</p>
+            <div class="testimonial-author">
+              <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Rahul & Ananya" loading="lazy" />
+              <div>
+                <div class="testimonial-name">Rahul & Ananya Sharma</div>
+                <div class="testimonial-location">📍 Mumbai, India</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-slide">
+          <div class="testimonial-inner">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">"Took the whole family here for a week and everyone — from the grandparents to the toddlers — had the time of their lives. The staff remembered our preferences, the food was outstanding, and the bird-watching tour was a genuine highlight."</p>
+            <div class="testimonial-author">
+              <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80" alt="Kavitha Nair" loading="lazy" />
+              <div>
+                <div class="testimonial-name">Kavitha Nair</div>
+                <div class="testimonial-location">📍 Chennai, India</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-slide">
+          <div class="testimonial-inner">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-quote">"I travel extensively for photography and Bluebird Homestay gave me the most stunning shots of my career. Golden hour from the mountain view room, the campfire sparks at night — the landscape here is endlessly photogenic."</p>
+            <div class="testimonial-author">
+              <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="David Chen" loading="lazy" />
+              <div>
+                <div class="testimonial-name">David Chen</div>
+                <div class="testimonial-location">📍 Singapore</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="testimonial-dots" id="testimonialDots">
+      <div class="t-dot active" onclick="goToSlide(0)"></div>
+      <div class="t-dot" onclick="goToSlide(1)"></div>
+      <div class="t-dot" onclick="goToSlide(2)"></div>
+      <div class="t-dot" onclick="goToSlide(3)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== OFFERS ====== -->
+<section id="offers">
+  <div class="container">
+    <div class="offers-header reveal">
+      <div class="section-tag">Special Packages</div>
+      <h2 class="section-title">Curated Escapes for<br>Every Occasion</h2>
+      <p class="section-subtitle">Bundle the best of Bluebird and save more while experiencing more.</p>
+    </div>
+    <div class="offers-grid">
+      <div class="offer-card reveal delay-1">
+        <div class="offer-img">
+          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=80" alt="Weekend Escape" loading="lazy" />
+          <div class="offer-img-overlay"></div>
+          <div class="offer-tag">Best Value</div>
+        </div>
+        <div class="offer-body">
+          <div class="offer-title">Weekend Escape Package</div>
+          <ul class="offer-list">
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> 2 Nights Stay in Deluxe Garden Room</li>
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> Complimentary Breakfast for 2 — Both Mornings</li>
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> Campfire Access with Chai & Snacks</li>
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> Guided Nature Walk — Saturday Morning</li>
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> Late Checkout — 1 PM</li>
+          </ul>
+          <div class="offer-footer">
+            <div class="offer-price">
+              <small>Starting from</small>
+              <span>₹11,200</span>
+            </div>
+            <a href="#contact" class="btn btn-primary">Book Package</a>
+          </div>
+        </div>
+      </div>
+      <div class="offer-card reveal delay-2">
+        <div class="offer-img">
+          <img src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=700&q=80" alt="Family Vacation" loading="lazy" />
+          <div class="offer-img-overlay"></div>
+          <div class="offer-tag">Family Favourite</div>
+        </div>
+        <div class="offer-body">
+          <div class="offer-title">Family Vacation Package</div>
+          <ul class="offer-list">
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> 3 Nights Stay in Spacious Family Suite</li>
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> Daily Breakfast & One Special Dinner</li>
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> Full-Day Private Sightseeing Tour</li>
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> Cycling & Village Tour Included</li>
+            <li class="offer-list-item"><span class="offer-list-icon">✓</span> 15% Discount on Spa Treatments</li>
+          </ul>
+          <div class="offer-footer">
+            <div class="offer-price">
+              <small>Starting from</small>
+              <span>₹24,500</span>
+            </div>
+            <a href="#contact" class="btn btn-primary">Book Package</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="faq-aside reveal-left">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title" style="margin-bottom:20px;">Everything You<br>Need to Know</h2>
+        <p class="section-subtitle" style="margin-bottom:32px;">Can't find your answer here? Reach out to us directly — we're always happy to help.</p>
+        <a href="#contact" class="btn btn-gold">Get in Touch ↗</a>
+        <div class="faq-aside-img" style="margin-top:36px;">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Bluebird Homestay" loading="lazy" />
+        </div>
+      </div>
+      <div class="faq-list reveal-right">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What are the check-in and check-out times?
+            <i class="faq-icon">+</i>
+          </button>
+          <div class="faq-answer">Check-in is from 2:00 PM onwards and check-out is by 11:00 AM. Early check-in and late check-out can be arranged subject to availability — just let us know in advance when booking and we'll do our best to accommodate you.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Is breakfast included in the room rate?
+            <i class="faq-icon">+</i>
+          </button>
+          <div class="faq-answer">Yes! A complimentary Kerala-style breakfast is included with all our room types. Served fresh every morning from 7:30 AM to 10:00 AM, it features local delicacies, fresh fruits, and aromatic chai. Vegan, vegetarian, and allergy-specific options are available on request.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Are pets allowed at Bluebird Homestay?
+            <i class="faq-icon">+</i>
+          </button>
+          <div class="faq-answer">We love animals, but for the comfort of all our guests and to preserve the natural wildlife around us, pets are currently not permitted on the property. We apologise for any inconvenience this may cause and are happy to recommend nearby pet-friendly stays if needed.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do you provide sightseeing and travel assistance?
+            <i class="faq-icon">+</i>
+          </button>
+          <div class="faq-answer">Absolutely! Our in-house travel concierge can arrange private sightseeing tours, temple visits, backwater cruises, spice plantation tours, and more. We partner with local, trusted guides to give you the most authentic Kerala experience possible. Just let us know your preferences.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Is parking available at the homestay?
+            <i class="faq-icon">+</i>
+          </button>
+          <div class="faq-answer">Yes, free secure parking is available on the property for all guests. We have ample space for cars, SUVs, and motorcycles. If you are arriving by public transport, we can also arrange a complimentary pickup from the nearest bus stop or railway station.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <div class="contact-form-wrap">
+          <div class="form-title">Reserve Your Stay</div>
+          <form onsubmit="handleForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="you@example.com" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Check-in Date</label>
+                <input type="date" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Check-out Date</label>
+                <input type="date" class="form-input" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Number of Guests</label>
+              <select class="form-input">
+                <option>1 Guest</option>
+                <option>2 Guests</option>
+                <option>3 Guests</option>
+                <option>4 Guests</option>
+                <option>5+ Guests</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message / Special Requests</label>
+              <textarea class="form-input" placeholder="Tell us about your stay preferences..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark" style="width:100%;justify-content:center;padding:15px;">
+              Send Booking Request →
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="contact-info-wrap reveal-right">
+        <div class="section-tag">Contact Us</div>
+        <div class="contact-title">We'd Love to<br>Host You</div>
+        <p class="contact-tagline">Reach out to us with any questions or to plan a bespoke experience. Our team responds within a few hours.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-val">+91 98475 XXXXX</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val">info@bluebirdhomestay.com</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <div class="contact-item-label">Address</div>
+              <div class="contact-item-val">Bluebird Homestay, Chalakudy, Thrissur, Kerala — 680307</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🕐</div>
+            <div>
+              <div class="contact-item-label">Reception Hours</div>
+              <div class="contact-item-val">6:00 AM – 10:00 PM (IST)</div>
+            </div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.822!2d76.3306!3d10.3005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080dfc3413ba79%3A0x8c8e4f0fbf23e3e6!2sChalakudy%2C%20Kerala!5e0!3m2!1sen!2sin!4v1699999999999!5m2!1sen!2sin"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="nav-logo-icon">🐦</div>
+          <div class="nav-logo-text"><span>Bluebird</span> Homestay</div>
+        </div>
+        <p class="footer-tagline">A place where nature whispers and time slows. Discover the soul of Kerala from our little corner of paradise.</p>
+        <div class="social-row">
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#about">About Us</a>
+          <a href="#rooms">Rooms & Suites</a>
+          <a href="#amenities">Amenities</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Experiences</div>
+        <div class="footer-links">
+          <a href="#experiences">Nature Walks</a>
+          <a href="#experiences">Campfire Nights</a>
+          <a href="#experiences">Trekking</a>
+          <a href="#experiences">Bird Watching</a>
+          <a href="#experiences">Cycling Tours</a>
+          <a href="#experiences">Photography</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Newsletter</div>
+        <p style="font-size:.82rem;color:rgba(255,255,255,.45);margin-bottom:16px;line-height:1.6;">Get exclusive offers, seasonal updates, and travel tips delivered to your inbox.</p>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="Your email address" />
+          <button type="button">Subscribe Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Bluebird Homestay. All Rights Reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cancellation Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ====== NAVBAR SCROLL ======
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  // ====== HAMBURGER ======
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburgerBtn.addEventListener('click', () => {
+    hamburgerBtn.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileClose.addEventListener('click', () => {
+    hamburgerBtn.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburgerBtn.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ====== INTERSECTION OBSERVER (REVEAL) ======
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ====== ANIMATED COUNTERS ======
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const isDecimal = el.hasAttribute('data-decimal');
+    let start = 0;
+    const duration = 1800;
+    const step = target / (duration / 16);
+    const interval = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        start = target;
+        clearInterval(interval);
+      }
+      if (isDecimal) {
+        el.textContent = (start / 10).toFixed(1);
+      } else {
+        el.textContent = Math.floor(start).toLocaleString();
+        if (target >= 1000) el.textContent = Math.floor(start).toLocaleString() + '+';
+      }
+    }, 16);
+  }
+
+  const counterEls = document.querySelectorAll('[data-target]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.counted) {
+        entry.target.dataset.counted = true;
+        animateCounter(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counterEls.forEach(el => counterObserver.observe(el));
+
+  // ====== TESTIMONIALS SLIDER ======
+  let currentSlide = 0;
+  const track = document.getElementById('testimonialsTrack');
+  const dots = document.querySelectorAll('.t-dot');
+  const totalSlides = dots.length;
+
+  function goToSlide(n) {
+    currentSlide = n;
+    track.style.transform = `translateX(-${n * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === n));
+  }
+
+  setInterval(() => {
+    goToSlide((currentSlide + 1) % totalSlides);
+  }, 5500);
+
+  // ====== FAQ ======
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ====== LIGHTBOX ======
+  function openLightbox(el) {
+    const src = el.querySelector('img').src;
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // ====== FORM ======
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = '✓ Booking Request Sent!';
+    btn.style.background = '#22c55e';
+    btn.style.color = 'white';
+    setTimeout(() => {
+      btn.textContent = 'Send Booking Request →';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 4000);
+  }
+</script>
+</body>
+</html>
